@@ -557,6 +557,23 @@
   opacity: 0.6;
 }
 
+/* Modern icon-only variant */
+.platform-icons.modern { gap: 2.5rem; opacity:1; }
+.platform-item.icon-only { flex-direction: column; gap:.55rem; }
+.platform-item.icon-only span { font-size:.85rem; letter-spacing:.4px; color:#d1d5db; transition:color .3s; }
+.plat-ico { font-size:2.2rem; display:block; filter:drop-shadow(0 4px 10px rgba(0,0,0,.4)); transition:transform .4s, filter .4s; }
+.plat-ico.tw { color:#e5e7eb; }
+.plat-ico.ig { color:#f472b6; }
+.plat-ico.li { color:#60a5fa; }
+.plat-ico.yt { color:#f87171; }
+.plat-ico.twc { color:#a78bfa; }
+.plat-ico.fb { color:#60a5fa; }
+.plat-ico.tk { color:#fff; text-shadow:0 0 6px rgba(255,255,255,.35); position:relative; }
+.plat-ico.tk::after, .plat-ico.tk::before { content:""; position:absolute; inset:0; border-radius:8px; pointer-events:none; }
+.plat-ico.tk::before { filter:blur(8px); }
+.platform-item.icon-only:hover .plat-ico { transform:translateY(-6px) scale(1.08); filter:drop-shadow(0 8px 18px rgba(168,85,247,.5)); }
+.platform-item.icon-only:hover span { color:#fff; }
+
 .platform-item {
   display: flex;
   align-items: center;

@@ -1,7 +1,8 @@
 import React from 'react';
 import './LandingPage.css';
 import SocioVertexLogo from '../assets/logos/SocioVertex.svg';
-import { FaCreditCard, FaChartLine, FaFileAlt, FaTools } from 'react-icons/fa';
+import { FaCreditCard, FaChartLine, FaFileAlt, FaTools, FaInstagram, FaLinkedinIn, FaYoutube, FaTwitch, FaFacebookF } from 'react-icons/fa';
+import { FaXTwitter, FaTiktok } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 
 const LandingPage = () => {
@@ -186,23 +187,14 @@ const LandingPage = () => {
       <section className="platforms">
         <div className="platforms-content">
           <p className="platforms-label">Supported Platforms</p>
-          <div className="platform-icons">
-            <div className="platform-item">
-              <div className="platform-icon twitter"></div>
-              <span>Twitter</span>
-            </div>
-            <div className="platform-item">
-              <div className="platform-icon instagram"></div>
-              <span>Instagram</span>
-            </div>
-            <div className="platform-item">
-              <div className="platform-icon linkedin"></div>
-              <span>LinkedIn</span>
-            </div>
-            <div className="platform-item">
-              <div className="platform-icon youtube"></div>
-              <span>YouTube</span>
-            </div>
+          <div className="platform-icons modern">
+            <div className="platform-item icon-only"><FaXTwitter className="plat-ico tw" /><span>Twitter</span></div>
+            <div className="platform-item icon-only"><FaInstagram className="plat-ico ig" /><span>Instagram</span></div>
+            <div className="platform-item icon-only"><FaLinkedinIn className="plat-ico li" /><span>LinkedIn</span></div>
+            <div className="platform-item icon-only"><FaYoutube className="plat-ico yt" /><span>YouTube</span></div>
+            <div className="platform-item icon-only"><FaTwitch className="plat-ico twc" /><span>Twitch</span></div>
+            <div className="platform-item icon-only"><FaFacebookF className="plat-ico fb" /><span>Facebook</span></div>
+            <div className="platform-item icon-only"><FaTiktok className="plat-ico tk" /><span>TikTok</span></div>
           </div>
         </div>
       </section>
