@@ -10,6 +10,19 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Global gradient background applied site-wide */
+  background: var(--app-gradient);
+  background-attachment: fixed;
+  color: #fff;
+  min-height: 100vh;
+}
+
+:root {
+  /* Primary site gradient derived from provided reference (black -> vibrant magenta) */
+  --app-gradient: linear-gradient(135deg,#000000 0%, #120012 28%, #3a0045 60%, #c000ff 100%);
+  /* Accent colors updated to harmonize with new gradient */
+  --accent-start: #c000ff;
+  --accent-end: #ff2adf;
 }
   
 .app-shell { min-height: 100vh; display: flex; flex-direction: column; }
