@@ -6,6 +6,7 @@ import InstagramPage from './pages/InstagramPage';
 import LinkedInPage from './pages/LinkedInPage';
 import TwitterPage from './pages/TwitterPage';
 import Footer from './components/Footer';
+import AuthPage from './pages/AuthPage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/instagram" element={<InstagramPage />} />
           <Route path="/linkedin" element={<LinkedInPage />} />
           <Route path="/twitter" element={<TwitterPage />} />
+          <Route path="/auth" element={<AuthPage />} />
         </Routes>
         <Footer />
       </div>
