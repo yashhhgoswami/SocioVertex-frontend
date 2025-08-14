@@ -181,6 +181,20 @@
 .signup-btn { background: linear-gradient(90deg,var(--accent-start),var(--accent-end)); border: 1px solid rgba(236,72,153,0.65); }
 .signup-btn:hover, .signup-btn:focus-visible { background: linear-gradient(90deg,#d149ff,#ff52e0); }
 
+/* User menu */
+.user-menu { position:relative; }
+.user-trigger { display:flex; align-items:center; gap:.55rem; background:rgba(255,255,255,0.07); border:1px solid rgba(168,85,247,0.4); padding:.5rem .75rem; border-radius:999px; cursor:pointer; font-size:.75rem; font-weight:600; color:#e9e4f5; letter-spacing:.4px; transition:.3s; }
+.user-trigger:hover, .user-trigger:focus-visible { background:linear-gradient(90deg,var(--accent-start),var(--accent-end)); color:#fff; outline:none; border-color:rgba(236,72,153,0.75); }
+.avatar { width:28px; height:28px; display:inline-flex; align-items:center; justify-content:center; background:linear-gradient(135deg,var(--accent-start),var(--accent-end)); border-radius:50%; font-size:.85rem; font-weight:700; color:#fff; box-shadow:0 0 0 2px rgba(255,255,255,0.15); }
+.user-name { max-width:120px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.chevron { font-size:.8rem; opacity:.7; }
+.user-dropdown { position:absolute; right:0; top:115%; min-width:220px; background:rgba(25,18,39,0.95); border:1px solid rgba(168,85,247,0.35); backdrop-filter:blur(18px) saturate(160%); border-radius:14px; padding:.55rem .5rem; display:flex; flex-direction:column; gap:.2rem; opacity:0; visibility:hidden; transform:translateY(6px) scale(.98); transition:.28s; z-index:140; box-shadow:0 18px 36px -14px rgba(0,0,0,.6), 0 4px 12px -6px rgba(0,0,0,.45); }
+.user-menu.open .user-dropdown { opacity:1; visibility:visible; transform:translateY(0) scale(1); }
+.user-item { text-align:left; background:none; border:none; padding:.6rem .7rem .55rem; border-radius:10px; font-size:.78rem; cursor:pointer; color:#d3c9ef; font-weight:500; text-decoration:none; display:flex; align-items:center; gap:.55rem; position:relative; transition:background .25s, color .25s; }
+.user-item:hover, .user-item:focus-visible { background:linear-gradient(90deg,rgba(192,0,255,0.25),rgba(255,42,223,0.25)); color:#fff; outline:none; }
+.user-item.logout { color:#ff9db5; }
+.user-item.logout:hover { background:linear-gradient(90deg,rgba(255,0,92,0.35),rgba(255,83,206,0.25)); color:#fff; }
+
 /* Ensure navbar spacing & layering */
 .navbar {
   position: sticky;

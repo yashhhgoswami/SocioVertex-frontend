@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './LandingPage.css';
 import SocioVertexLogo from '../assets/logos/SocioVertex.svg';
 import { FaCreditCard, FaChartLine, FaFileAlt, FaTools, FaInstagram, FaLinkedinIn, FaYoutube, FaTwitch, FaFacebookF, FaChartPie, FaRobot, FaLayerGroup, FaBolt } from 'react-icons/fa';
 import { FaXTwitter, FaTiktok } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext.jsx';
 
 const LandingPage = () => {
+  const { user, logout } = useAuth();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const displayName = user?.displayName || (user?.email ? user.email.split('@')[0] : '');
+  const initial = displayName ? displayName.charAt(0).toUpperCase() : 'U';
+  const toggleMenu = () => setMenuOpen(o=>!o);
+  const closeMenu = () => setMenuOpen(false);
+  // Close on click outside (basic)
+  React.useEffect(()=>{
+    if(!menuOpen) return;
+    const onDoc = (e)=>{ if(!e.target.closest('.user-menu')) closeMenu(); };
+    document.addEventListener('mousedown', onDoc);
+    return ()=>document.removeEventListener('mousedown', onDoc);
+  },[menuOpen]);
   return (
     <div className="landing-page">
       {/* Navigation Header */}
@@ -119,7 +133,7 @@ const LandingPage = () => {
           <img src={SocioVertexLogo} alt="SocioVertex Logo" className="logo-svg" />
         </div>
         
-        <div className="nav-right">
+  <div className="nav-right">
           <div className="dropdown">
             <button className="dropdown-btn">
               Products and Services ▼
@@ -144,11 +158,28 @@ const LandingPage = () => {
             </div>
           </div>
           <a href="#" className="nav-link">Contact Us</a>
-          <div className="auth-section">
-            <button className="login-btn">Login</button>
-            <span className="auth-divider">/</span>
-            <button className="signup-btn">SignUp</button>
-          </div>
+          {!user && (
+            <div className="auth-section">
+              <Link to="/auth?mode=login" className="login-btn" role="button">Login</Link>
+              <span className="auth-divider">/</span>
+              <Link to="/auth?mode=signup" className="signup-btn" role="button">SignUp</Link>
+            </div>
+          )}
+          {user && (
+            <div className={`user-menu ${menuOpen ? 'open': ''}`}>
+              <button className="user-trigger" onClick={toggleMenu} aria-haspopup="true" aria-expanded={menuOpen}>
+                <span className="avatar" aria-hidden="true">{initial}</span>
+                <span className="user-name">{displayName}</span>
+                <span className="chevron" aria-hidden="true">▾</span>
+              </button>
+              <div className="user-dropdown" role="menu">
+                <Link to="/profile" className="user-item" role="menuitem" onClick={closeMenu}>Your Profile</Link>
+                <Link to="/dashboard" className="user-item" role="menuitem" onClick={closeMenu}>Dashboard</Link>
+                <Link to="#" className="user-item" role="menuitem" onClick={closeMenu}>Linked Social Media</Link>
+                <button className="user-item logout" role="menuitem" onClick={()=>{ logout(); closeMenu(); }}>Logout</button>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
@@ -186,7 +217,8 @@ const LandingPage = () => {
           </div>
           {/* CTA Buttons */}
           <div className="cta-buttons hero-ctas">
-            <button className="btn-primary large shadow-pop">Get Started Free</button>
+            {!user && <Link to="/auth?mode=signup" className="btn-primary large shadow-pop" style={{textDecoration:'none'}}>Get Started Free</Link>}
+            {user && <Link to="/dashboard" className="btn-primary large shadow-pop" style={{textDecoration:'none'}}>Open Dashboard</Link>}
             <button className="btn-secondary large glass-btn">Watch Demo</button>
           </div>
           {/* Quick Stats */}
