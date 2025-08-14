@@ -19,10 +19,12 @@ body {
 
 :root {
   /* Primary site gradient derived from provided reference (black -> vibrant magenta) */
-  --app-gradient: linear-gradient(135deg,#000000 0%, #120012 28%, #3a0045 60%, #c000ff 100%);
-  /* Accent colors updated to harmonize with new gradient */
-  --accent-start: #c000ff;
-  --accent-end: #ff2adf;
+  --app-gradient: radial-gradient(circle at 20% 20%, rgba(160,0,255,0.08), rgba(0,0,0,0) 55%),
+                   linear-gradient(135deg,#050308 0%, #0b0312 25%, #130626 55%, #25003a 72%, #4a0072 88%, #7a00b5 100%);
+  /* Accents shifted slightly cooler & deeper */
+  --accent-start: #a000ff;
+  --accent-end: #ff35d8;
+  --accent-strong: #ff42f0;
 }
   
 .app-shell { min-height: 100vh; display: flex; flex-direction: column; }

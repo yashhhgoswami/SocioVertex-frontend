@@ -152,33 +152,58 @@ const LandingPage = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section (revamped) */}
       <section className="hero">
+        {/* Decorative layers */}
+        <div className="hero-bg" aria-hidden="true">
+          <div className="grid-overlay" />
+          <div className="noise-overlay" />
+          <div className="orb orb-a" />
+            <div className="orb orb-b" />
+            <div className="orb orb-c" />
+          <div className="hero-gradient-blob blob-left" />
+          <div className="hero-gradient-blob blob-right" />
+        </div>
         <div className="hero-content">
+          <div className="hero-eyebrow">The Unified Creator Intelligence Hub</div>
           <h1 className="hero-title">
-            Unify Your 
-            <span className="gradient-text"> Social Media</span> Analytics
+            <span className="outline-text">Unify</span> Your 
+            <span className="gradient-text"> Social Media</span><br /> Analytics
           </h1>
           <p className="hero-description">
-            Connect all your social platforms in one dashboard. Track performance, analyze trends, and grow your audience with powerful insights from Twitter, Instagram, LinkedIn, and YouTube.
+            Track, compare & amplify performance across platforms with real-time multi-network insights, AI suggestions & beautiful share-ready reports.
           </p>
-          
           {/* Search Bar */}
-          <div className="search-container">
+          <div className="search-container hero-search-accent">
             <div className="search-box">
-              <input 
-                type="text" 
-                placeholder="Enter username or URL to analyze..." 
+              <input
+                type="text"
+                placeholder="Search a creator or paste a profile URL..."
                 className="search-input"
               />
               <button className="search-btn">Analyze</button>
             </div>
           </div>
-
           {/* CTA Buttons */}
-          <div className="cta-buttons">
-            <button className="btn-primary large">Get Started Free</button>
-            <button className="btn-secondary large">Watch Demo</button>
+          <div className="cta-buttons hero-ctas">
+            <button className="btn-primary large shadow-pop">Get Started Free</button>
+            <button className="btn-secondary large glass-btn">Watch Demo</button>
+          </div>
+          {/* Quick Stats */}
+          <div className="hero-stats" role="list" aria-label="Platform scale stats">
+            <div className="stat" role="listitem"><span className="stat-num">105M</span><span className="stat-label">Profiles Tracked</span></div>
+            <div className="stat" role="listitem"><span className="stat-num">69M</span><span className="stat-label">YouTube</span></div>
+            <div className="stat" role="listitem"><span className="stat-num">11M</span><span className="stat-label">Instagram</span></div>
+            <div className="stat" role="listitem"><span className="stat-num">9.4M</span><span className="stat-label">Twitter</span></div>
+            <div className="stat" role="listitem"><span className="stat-num">4.2M</span><span className="stat-label">LinkedIn</span></div>
+            <div className="stat" role="listitem"><span className="stat-num">3.5M</span><span className="stat-label">Facebook</span></div>
+            <div className="stat" role="listitem"><span className="stat-num">7.3M</span><span className="stat-label">Twitch</span></div>
+          </div>
+          <div className="hero-wave" aria-hidden="true">
+            <svg viewBox="0 0 1440 180" preserveAspectRatio="none" className="wave-svg">
+              <path d="M0 120 Q 240 60 480 100 T 960 90 T 1440 110 V180 H0 Z" fill="rgba(0,0,0,0.45)" stroke="rgba(255,255,255,0.05)" strokeWidth="2" />
+              <path d="M0 100 Q 240 40 480 80 T 960 70 T 1440 90 V180 H0 Z" fill="rgba(0,0,0,0.35)" />
+            </svg>
           </div>
         </div>
       </section>
