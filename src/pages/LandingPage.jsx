@@ -1,7 +1,7 @@
 import React from 'react';
 import './LandingPage.css';
 import SocioVertexLogo from '../assets/logos/SocioVertex.svg';
-import { FaCreditCard, FaChartLine, FaFileAlt, FaTools, FaInstagram, FaLinkedinIn, FaYoutube, FaTwitch, FaFacebookF } from 'react-icons/fa';
+import { FaCreditCard, FaChartLine, FaFileAlt, FaTools, FaInstagram, FaLinkedinIn, FaYoutube, FaTwitch, FaFacebookF, FaChartPie, FaRobot, FaLayerGroup, FaBolt } from 'react-icons/fa';
 import { FaXTwitter, FaTiktok } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 
@@ -233,37 +233,37 @@ const LandingPage = () => {
           
           <div className="features-grid">
             <div className="feature-card">
-              <div className="feature-icon">📊</div>
+              <div className="feature-icon" aria-hidden="true"><FaChartPie /></div>
               <h3 className="feature-title">Unified Dashboard</h3>
               <p className="feature-description">View all your social media metrics in one place. Track followers, engagement, and performance across platforms.</p>
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon">📈</div>
+              <div className="feature-icon" aria-hidden="true"><FaChartLine /></div>
               <h3 className="feature-title">Growth Analytics</h3>
               <p className="feature-description">Detailed insights into your audience growth, best performing content, and optimal posting times.</p>
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon">🤖</div>
+              <div className="feature-icon" aria-hidden="true"><FaRobot /></div>
               <h3 className="feature-title">AI Insights</h3>
               <p className="feature-description">Get AI-powered recommendations for content strategy, optimal posting schedules, and audience engagement.</p>
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon">📱</div>
+              <div className="feature-icon" aria-hidden="true"><FaLayerGroup /></div>
               <h3 className="feature-title">Multi-Platform</h3>
               <p className="feature-description">Connect Twitter, Instagram, LinkedIn, and YouTube. More platforms coming soon.</p>
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon">📄</div>
+              <div className="feature-icon" aria-hidden="true"><FaFileAlt /></div>
               <h3 className="feature-title">Automated Reports</h3>
               <p className="feature-description">Generate beautiful PDF reports and schedule them to be sent automatically to your email.</p>
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon">⚡</div>
+              <div className="feature-icon" aria-hidden="true"><FaBolt /></div>
               <h3 className="feature-title">Real-time Updates</h3>
               <p className="feature-description">Get instant notifications when your content goes viral or when there are significant changes in engagement.</p>
             </div>
