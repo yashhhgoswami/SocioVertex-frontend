@@ -17,14 +17,15 @@ import { getAuth, GoogleAuthProvider, GithubAuthProvider } from 'firebase/auth';
 // VITE_FIREBASE_APP_ID=...
 // (Optional) VITE_FIREBASE_MEASUREMENT_ID=...
 
+// IMPORTANT: For security, do not rely on fallback literals in production. Provide values via .env.
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || 'AIzaSyBgcRq7hQc-8eh9T_1i7bqYuup-ACyaaAg',
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || 'sociovertex-ce0f0.firebaseapp.com',
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || 'sociovertex-ce0f0',
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || 'sociovertex-ce0f0.firebasestorage.app',
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || '759934968221',
-  appId: import.meta.env.VITE_FIREBASE_APP_ID || '1:759934968221:web:22ad6ce001b2da51e40f74',
-  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || 'G-QRDRSF31MF',
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);
