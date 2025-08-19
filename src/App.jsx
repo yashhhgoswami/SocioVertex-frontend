@@ -11,6 +11,7 @@ import Dashboard from './pages/Dashboard.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import { AuthProvider } from './context/AuthContext.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
+import ContactPage from './pages/ContactPage.jsx';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+            <Route path="/contact" element={<ContactPage />} />
           </Routes>
           <Footer />
         </div>

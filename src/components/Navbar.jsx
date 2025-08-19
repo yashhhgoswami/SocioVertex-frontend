@@ -128,7 +128,7 @@ const Navbar = () => {
             <a href="#" className="dropdown-item"><span className="dropdown-icon"><FaTools /></span>Business API</a>
           </div>
         </div>
-        <a href="#" className="nav-link">Contact Us</a>
+  <Link to="/contact" className="nav-link">Contact Us</Link>
         {!user && (
           <div className="auth-section">
             <Link to="/auth?mode=login" className="login-btn" role="button">Login</Link>
