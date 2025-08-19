@@ -12,6 +12,7 @@ import ProtectedRoute from './components/ProtectedRoute.jsx';
 import { AuthProvider } from './context/AuthContext.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import ContactPage from './pages/ContactPage.jsx';
+import LinkedSocialPage from './pages/LinkedSocialPage.jsx';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/linked" element={<ProtectedRoute><LinkedSocialPage /></ProtectedRoute>} />
           </Routes>
           <Footer />
         </div>
