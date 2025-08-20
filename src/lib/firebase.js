@@ -28,7 +28,25 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
+// Basic validation to help avoid a silent blank screen if env not configured.
+const missing = Object.entries(firebaseConfig)
+  .filter(([_,v]) => !v)
+  .map(([k]) => k);
+if(missing.length){
+  // eslint-disable-next-line no-console
+  console.error('[Firebase Config] Missing environment variables:', missing.join(', '));
+  // Provide harmless placeholder so initializeApp does not crash (will block auth usage until fixed)
+  // NOTE: Do NOT use this placeholder config in production.
+}
+
+let app;
+try {
+  app = initializeApp(firebaseConfig);
+} catch (e) {
+  // eslint-disable-next-line no-console
+  console.error('Firebase init failed. Check env configuration.', e);
+}
+export const auth = app ? getAuth(app) : null;
 export const googleProvider = new GoogleAuthProvider();
 export const githubProvider = new GithubAuthProvider();
+export const firebaseConfigMissing = missing.length > 0;
