@@ -9,24 +9,29 @@
 .billing-toggle .save-pill { background:#16a34a; color:#fff; font-size:.6rem; padding:.15rem .4rem; border-radius:4px; margin-left:.35rem; text-transform:uppercase; letter-spacing:1px; }
 
 .plans-wrapper { max-width:1250px; margin:0 auto; padding:0 1.5rem 5rem; }
-.plans-grid { display:grid; gap:2rem; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); margin-top:2.2rem; }
-.plan-card { position:relative; background:linear-gradient(165deg,rgba(255,255,255,.06),rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); padding:1.75rem 1.5rem 2.2rem; border-radius:24px; backdrop-filter:blur(18px); display:flex; flex-direction:column; box-shadow:0 4px 24px -10px #000; transition:.35s; }
-.plan-card:hover { transform:translateY(-6px); border-color:rgba(255,255,255,.22); }
-.plan-card.popular { border:1px solid #4d5dff; box-shadow:0 0 0 2px #4d5dff33,0 8px 32px -10px #2f4bff66; }
-.plan-card .badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:linear-gradient(90deg,#2f4bff,#884dff); padding:.35rem .75rem; font-size:.65rem; font-weight:600; letter-spacing:.5px; border-radius:22px; box-shadow:0 6px 18px -6px #2f4bffaa; }
-.plan-card .save-badge { position:absolute; top:10px; right:10px; background:#16a34a; font-size:.55rem; padding:.25rem .5rem; border-radius:6px; font-weight:600; letter-spacing:.5px; }
-.plan-card h2 { margin:0 0 .35rem; font-size:1.35rem; letter-spacing:.5px; }
+.plans-grid { display:grid; gap:2rem; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); margin-top:2.2rem; align-items:stretch; }
+/* Card base matches global glass + brand accent palette */
+.plan-card { position:relative; background:linear-gradient(160deg,rgba(20,28,45,.85),rgba(10,16,28,.7)); border:1px solid rgba(120,140,200,.12); padding:1.9rem 1.55rem 2.2rem; border-radius:26px; backdrop-filter:blur(18px) saturate(135%); display:flex; flex-direction:column; box-shadow:0 4px 28px -12px #000, 0 2px 6px -2px #000 inset; transition:.4s; }
+.plan-card:before { content:""; position:absolute; inset:0; border-radius:inherit; background:radial-gradient(circle at 30% 20%,rgba(90,120,255,.12),transparent 60%); opacity:.6; pointer-events:none; }
+.plan-card:hover { transform:translateY(-8px); border-color:#4d5dff; box-shadow:0 6px 32px -10px #253bff88,0 4px 12px -4px #000; }
+/* Popular plan gets subtle inner glow instead of constant outline */
+.plan-card.popular { background:linear-gradient(155deg,rgba(55,70,120,.55),rgba(25,35,60,.6)); }
+.plan-card.popular:after { content:""; position:absolute; inset:1px; border-radius:inherit; background:linear-gradient(145deg,rgba(80,110,255,.18),rgba(140,80,255,.15),rgba(255,100,180,.12)); mix-blend-mode:overlay; pointer-events:none; }
+/* Badge repositioned top-right */
+.plan-card .badge { position:absolute; top:10px; right:10px; transform:none; background:linear-gradient(90deg,#2f4bff,#884dff); padding:.4rem .7rem .38rem; font-size:.58rem; font-weight:600; letter-spacing:.9px; border-radius:8px; box-shadow:0 4px 14px -6px #2f4bffaa; text-transform:uppercase; }
+.plan-card .save-badge { position:absolute; top:10px; left:10px; background:#16a34a; font-size:.55rem; padding:.25rem .55rem; border-radius:6px; font-weight:600; letter-spacing:.5px; box-shadow:0 2px 6px -2px #16a34a99; }
+.plan-card h2 { margin:0 0 .35rem; font-size:1.32rem; letter-spacing:.4px; font-weight:600; }
 .plan-card .tagline { font-size:.8rem; letter-spacing:.5px; text-transform:uppercase; color:#7b8aa7; font-weight:600; margin:0 0 1.3rem; }
 .price-row { display:flex; align-items:flex-end; gap:.45rem; margin-bottom:1.2rem; }
 .price-row .price { font-size:2.4rem; font-weight:600; background:linear-gradient(90deg,#8ba7ff,#b388ff); -webkit-background-clip:text; background-clip:text; color:transparent; line-height:1; }
 .price-row .period { font-size:.8rem; font-weight:600; color:#90a2c7; margin-bottom:.4rem; }
 .price-row .crossed { font-size:.8rem; text-decoration:line-through; opacity:.5; align-self:flex-start; margin-top:.35rem; }
-.features { list-style:none; padding:0; margin:0 0 1.5rem; display:flex; flex-direction:column; gap:.55rem; font-size:.85rem; }
+.features { list-style:none; padding:0; margin:0 0 1.5rem; display:flex; flex-direction:column; gap:.55rem; font-size:.82rem; flex-grow:1; }
 .features li { position:relative; padding-left:1.25rem; color:#d6e2ff; }
 .features li:before { content:'✔'; position:absolute; left:0; top:0; color:#4ade80; font-size:.75rem; line-height:1.2; }
-.cta-btn { background:linear-gradient(90deg,#2f4bff,#8b5cf6); border:0; color:#fff; font-weight:600; letter-spacing:.5px; padding:.75rem 1rem; border-radius:14px; cursor:pointer; font-size:.85rem; box-shadow:0 4px 18px -6px #2f4bffaa; transition:.3s; }
-.plan-card.popular .cta-btn { background:linear-gradient(90deg,#ff7e33,#ff3d81); box-shadow:0 4px 22px -6px #ff3d8177; }
-.cta-btn:hover { filter:brightness(1.12); transform:translateY(-2px); }
+.cta-btn { background:linear-gradient(90deg,#2f4bff,#8b5cf6,#ec4899); border:0; color:#fff; font-weight:600; letter-spacing:.6px; padding:.78rem 1rem; border-radius:16px; cursor:pointer; font-size:.82rem; box-shadow:0 6px 20px -8px #273bffaa; transition:.35s; margin-top:auto; }
+.plan-card.popular .cta-btn { background:linear-gradient(90deg,#ff7e33,#ff3d81,#c026d3); box-shadow:0 6px 24px -8px #ff3d8199; }
+.cta-btn:hover { filter:brightness(1.15); transform:translateY(-3px); box-shadow:0 10px 30px -10px #273bffbb; }
 
 .comparison { margin-top:4.5rem; }
 .comparison h3 { text-align:center; margin:0 0 1.8rem; font-size:1.4rem; letter-spacing:.5px; }
