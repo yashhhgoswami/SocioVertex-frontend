@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './LinkedSocialPage.css';
-import { FaYoutube, FaInstagram, FaLinkedinIn, FaTwitter, FaTwitch, FaPlug, FaUnlink, FaSyncAlt, FaCheckCircle, FaExclamationTriangle } from 'react-icons/fa';
+import { FaYoutube, FaInstagram, FaLinkedinIn, FaTwitter, FaTwitch, FaFacebook, FaTiktok, FaPlug, FaUnlink, FaSyncAlt, FaCheckCircle, FaExclamationTriangle, FaShieldAlt, FaLock, FaClock, FaChartLine, FaRobot } from 'react-icons/fa';
 import Navbar from '../components/Navbar.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
 
@@ -10,6 +10,8 @@ const PROVIDERS = [
 	{ key:'instagram', label:'Instagram', icon: <FaInstagram />, color:'#f472b6' },
 	{ key:'linkedin', label:'LinkedIn', icon: <FaLinkedinIn />, color:'#60a5fa' },
 	{ key:'twitter', label:'Twitter / X', icon: <FaTwitter />, color:'#e5e7eb' },
+	{ key:'facebook', label:'Facebook', icon: <FaFacebook />, color:'#3b82f6' },
+	{ key:'tiktok', label:'TikTok', icon: <FaTiktok />, color:'#14b8a6' },
 	{ key:'twitch', label:'Twitch', icon: <FaTwitch />, color:'#a78bfa' },
 ];
 
@@ -19,6 +21,8 @@ const initialLinked = {
 	instagram: { status:'expired', lastSync: Date.now() - 1000*60*60*25, followers: 9032, posts: 189 },
 	linkedin: null,
 	twitter: { status:'ok', lastSync: Date.now() - 1000*60*33, followers: 12049, posts: 210 },
+	facebook: null,
+	tiktok: null,
 	twitch: null,
 };
 
@@ -98,20 +102,35 @@ export default function LinkedSocialPage(){
 				</section>
 				<section className="how-it-works">
 					<h2 className="section-heading">How It Works</h2>
-					<ol className="steps">
-						<li><strong>OAuth Secure</strong> – Authorize via official platform screens.</li>
-						<li><strong>Encrypted Token Vault</strong> – Tokens stored & rotated.</li>
-						<li><strong>Scheduled Harvest</strong> – Smart fetch intervals by growth velocity.</li>
-						<li><strong>Unified Metrics</strong> – Normalized for cross-platform comparison.</li>
-						<li><strong>AI Assist</strong> – Strategy adapts as performance shifts.</li>
-					</ol>
+					<ul className="steps icon-steps">
+						<li>
+							<span className="step-ico" style={{'--step-color':'#6366f1'}}><FaShieldAlt /></span>
+							<div className="step-body"><strong>OAuth Secure</strong> – Authorize via official platform screens.</div>
+						</li>
+						<li>
+							<span className="step-ico" style={{'--step-color':'#8b5cf6'}}><FaLock /></span>
+							<div className="step-body"><strong>Encrypted Token Vault</strong> – Tokens stored & rotated.</div>
+						</li>
+						<li>
+							<span className="step-ico" style={{'--step-color':'#0ea5e9'}}><FaClock /></span>
+							<div className="step-body"><strong>Scheduled Harvest</strong> – Smart fetch intervals by growth velocity.</div>
+						</li>
+						<li>
+							<span className="step-ico" style={{'--step-color':'#22c55e'}}><FaChartLine /></span>
+							<div className="step-body"><strong>Unified Metrics</strong> – Normalized for cross-platform comparison.</div>
+						</li>
+						<li>
+							<span className="step-ico" style={{'--step-color':'#f472b6'}}><FaRobot /></span>
+							<div className="step-body"><strong>AI Assist</strong> – Strategy adapts as performance shifts.</div>
+						</li>
+					</ul>
 				</section>
 				<section className="next-suggestions">
 					<h2 className="section-heading">Next Suggestions</h2>
-					<div className="suggest-box">
-						{PROVIDERS.filter(p=>!accounts[p.key]).length===0 && <p>All available platforms linked. Coverage maxed!</p>}
-						{PROVIDERS.filter(p=>!accounts[p.key]).slice(0,2).map(p=> (
-							<div key={p.key} className="suggest-item">
+					<div className="suggest-grid">
+						{PROVIDERS.filter(p=>!accounts[p.key]).length===0 && <p style={{gridColumn:'1 / -1'}}>All available platforms linked. Coverage maxed!</p>}
+						{PROVIDERS.filter(p=>!accounts[p.key]).slice(0,4).map(p=> (
+							<div key={p.key} className="suggest-item block">
 								<div className="s-icon" style={{'--pcolor':p.color}}>{p.icon}</div>
 								<div className="s-body">
 									<h4>Connect {p.label}</h4>

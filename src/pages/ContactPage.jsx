@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { FaGlobeAmericas, FaLock, FaBolt, FaHandshake } from 'react-icons/fa';
 import Navbar from '../components/Navbar.jsx';
 import './ContactPage.css';
 
@@ -227,8 +228,8 @@ function FAQItem({ item }) {
 }
 
 const highlightData = [
-  { title:'Global Coverage', desc:'We monitor & process creator metrics across major platforms with region-aware latency optimization.', icon:'🌐' },
-  { title:'Secure by Design', desc:'OAuth tokens are encrypted at rest & rotated. Granular revocation and audit logs coming soon.', icon:'🔐' },
-  { title:'99.9% Uptime Goal', desc:'Redundant crawlers + queue smoothing keep your dashboards live & fresh.', icon:'⚡' },
-  { title:'Human + AI Support', desc:'Blend of expert analysts & copilots accelerate responses & insights.', icon:'🤝' },
+  { title:'Global Coverage', desc:'We monitor & process creator metrics across major platforms with region-aware latency optimization.', icon:<FaGlobeAmericas /> },
+  { title:'Secure by Design', desc:'OAuth tokens are encrypted at rest & rotated. Granular revocation and audit logs coming soon.', icon:<FaLock /> },
+  { title:'99.9% Uptime Goal', desc:'Redundant crawlers + queue smoothing keep your dashboards live & fresh.', icon:<FaBolt /> },
+  { title:'Human + AI Support', desc:'Blend of expert analysts & copilots accelerate responses & insights.', icon:<FaHandshake /> },
 ];

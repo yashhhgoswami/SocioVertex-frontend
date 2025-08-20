@@ -130,7 +130,9 @@ const LandingPage = () => {
         </div>
         
         <div className="nav-center">
-          <img src={SocioVertexLogo} alt="SocioVertex Logo" className="logo-svg" />
+          <Link to="/" aria-label="Go to home / landing page">
+            <img src={SocioVertexLogo} alt="SocioVertex Logo" className="logo-svg" />
+          </Link>
         </div>
         
   <div className="nav-right">
@@ -175,7 +177,8 @@ const LandingPage = () => {
               <div className="user-dropdown" role="menu">
                 <Link to="/profile" className="user-item" role="menuitem" onClick={closeMenu}>Your Profile</Link>
                 <Link to="/dashboard" className="user-item" role="menuitem" onClick={closeMenu}>Dashboard</Link>
-                <Link to="#" className="user-item" role="menuitem" onClick={closeMenu}>Linked Social Media</Link>
+                <Link to="/about" className="user-item" role="menuitem" onClick={closeMenu}>About Us</Link>
+                <Link to="/linked" className="user-item" role="menuitem" onClick={closeMenu}>Linked Social Media</Link>
                 <button className="user-item logout" role="menuitem" onClick={()=>{ logout(); closeMenu(); }}>Logout</button>
               </div>
             </div>

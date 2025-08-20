@@ -837,7 +837,7 @@
 }
 
 /* ==== Revamped Hero Textured Design Additions ==== */
-.hero { position:relative; overflow:hidden; padding:6.5rem 1.5rem 4.5rem; }
+.hero { position:relative; overflow:hidden; padding:6.5rem 1.5rem 3.5rem; }
 .hero-bg { position:absolute; inset:0; pointer-events:none; }
 .hero-gradient-blob { position:absolute; width:48vw; height:48vw; max-width:760px; filter:blur(70px) saturate(130%); opacity:.38; mix-blend-mode:screen; will-change:transform; }
 .hero-gradient-blob.blob-left { left:-12%; top:10%; background:radial-gradient(circle at 35% 35%, var(--accent-start), transparent 60%), radial-gradient(circle at 70% 70%, rgba(255,53,216,0.65), transparent 70%); animation: floatBlob 26s ease-in-out infinite; }
@@ -869,13 +869,37 @@
 .glass-btn { background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.25); backdrop-filter:blur(10px); }
 .glass-btn:hover { background:rgba(255,255,255,0.15); }
 
-.hero-stats { display:flex; flex-wrap:nowrap; gap:1.9rem; justify-content:center; margin:3.25rem auto 0; max-width:1080px; position:relative; padding:1.2rem 2rem 1rem; background:linear-gradient(180deg, rgba(0,0,0,0.7), rgba(0,0,0,0.35) 70%, rgba(0,0,0,0)); border:1px solid rgba(255,255,255,0.08); backdrop-filter:blur(12px); border-radius:24px; box-shadow:0 10px 28px -12px rgba(0,0,0,.6), 0 4px 14px -6px rgba(0,0,0,.4); }
-.stat { display:flex; flex-direction:column; align-items:center; gap:.35rem; min-width:110px; flex:0 0 auto; }
+.hero-stats { display:flex; flex-wrap:nowrap; gap:1.9rem; justify-content:space-between; margin:3.25rem auto 0; max-width:1080px; position:relative; padding:1.1rem 1.4rem 1rem; background:linear-gradient(180deg, rgba(0,0,0,0.7), rgba(0,0,0,0.35) 70%, rgba(0,0,0,0)); border:1px solid rgba(255,255,255,0.08); backdrop-filter:blur(12px); border-radius:24px; box-shadow:0 10px 28px -12px rgba(0,0,0,.6), 0 4px 14px -6px rgba(0,0,0,.4); overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none; }
+.hero-stats::-webkit-scrollbar { display:none; }
+/* Make stats flex so they can shrink instead of wrapping into a second line */
+.stat { display:flex; flex-direction:column; align-items:center; gap:.35rem; flex:1 1 90px; min-width:80px; }
+/* Slightly tighten spacing on very narrow screens so all items fit without scroll for common breakpoints */
+@media (max-width:960px){
+  .hero-stats { gap:1.2rem; padding:.9rem 1rem .8rem; }
+  .stat { flex:1 1 70px; min-width:72px; }
+}
+@media (max-width:640px){
+  .hero-stats { gap:.8rem; }
+  .stat { flex:1 1 60px; min-width:60px; }
+}
 .stat-num { font-size:2.1rem; font-weight:700; letter-spacing:.5px; background:linear-gradient(45deg,var(--accent-start),var(--accent-strong)); background-clip:text; -webkit-background-clip:text; color:transparent; filter:drop-shadow(0 2px 6px rgba(160,0,255,.55)); }
 .stat-label { font-size:.62rem; letter-spacing:1.9px; text-transform:uppercase; opacity:.8; font-weight:600; color:#b9b3c7; }
 
-.hero-wave { position:absolute; left:0; bottom:-1px; width:100%; pointer-events:none; }
-.wave-svg { display:block; width:100%; height:auto; }
+/* Wave removed per design feedback */
+.hero-wave { display:none !important; }
+.wave-svg { display:none; }
+/* Soft gradient bridge beneath the wave to blend hero dark area into the following purple background */
+.hero::after { content:""; position:absolute; left:0; right:0; bottom:-130px; height:130px; pointer-events:none; background:
+  linear-gradient(180deg,
+    rgba(0,0,0,0.60) 0%,
+    rgba(18,0,32,0.62) 30%,
+    rgba(42,0,72,0.58) 55%,
+    rgba(72,0,128,0.45) 75%,
+    rgba(90,0,160,0.28) 88%,
+    rgba(110,0,190,0) 100%);
+  z-index:0; }
+/* Ensure hero main content and stats sit above the gradient bridge */
+.hero-content, .hero-stats, .hero-wave { position:relative; z-index:2; }
 
 @media (max-width:960px){
   .hero { padding:5.5rem 1.2rem 4rem; }
