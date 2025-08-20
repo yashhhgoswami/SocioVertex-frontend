@@ -141,10 +141,10 @@ const LandingPage = () => {
               Products and Services ▼
             </button>
             <div className="dropdown-menu">
-              <a href="#" className="dropdown-item">
+              <Link to="/membership" className="dropdown-item" style={{textDecoration:'none'}}>
                 <span className="dropdown-icon"><FaCreditCard /></span>
                 SocioVertex Membership
-              </a>
+              </Link>
               <a href="#" className="dropdown-item">
                 <span className="dropdown-icon"><FaChartLine /></span>
                 Creator Consulting
@@ -178,6 +178,7 @@ const LandingPage = () => {
                 <Link to="/profile" className="user-item" role="menuitem" onClick={closeMenu}>Your Profile</Link>
                 <Link to="/dashboard" className="user-item" role="menuitem" onClick={closeMenu}>Dashboard</Link>
                 <Link to="/about" className="user-item" role="menuitem" onClick={closeMenu}>About Us</Link>
+                <Link to="/membership" className="user-item" role="menuitem" onClick={closeMenu}>Membership</Link>
                 <Link to="/linked" className="user-item" role="menuitem" onClick={closeMenu}>Linked Social Media</Link>
                 <button className="user-item logout" role="menuitem" onClick={()=>{ logout(); closeMenu(); }}>Logout</button>
               </div>

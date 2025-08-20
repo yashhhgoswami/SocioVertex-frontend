@@ -14,6 +14,7 @@ import { firebaseConfigMissing } from './lib/firebase.js';
 import ProfilePage from './pages/ProfilePage.jsx';
 import ContactPage from './pages/ContactPage.jsx';
 import AboutPage from './pages/AboutPage.jsx';
+import MembershipPage from './pages/MembershipPage.jsx';
 import LinkedSocialPage from './pages/LinkedSocialPage.jsx';
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
             <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/about" element={<AboutPage />} />
+      <Route path="/membership" element={<MembershipPage />} />
             <Route path="/linked" element={<ProtectedRoute><LinkedSocialPage /></ProtectedRoute>} />
           </Routes>
           <Footer />
