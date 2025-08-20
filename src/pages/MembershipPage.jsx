@@ -73,7 +73,6 @@ export default function MembershipPage(){
         <div className="plans-grid">
           {plans.map(p=> (
             <div key={p.id} className={`plan-card ${p.popular? 'popular':''}`}> 
-              {p.popular && <div className="badge">Most Popular</div>}
               {p.save && <div className="save-badge">{p.save}</div>}
               <h2>{p.name}</h2>
               <p className="tagline">{p.tagline}</p>
