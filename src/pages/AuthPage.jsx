@@ -5,6 +5,7 @@ import { FaGoogle, FaGithub, FaCheckCircle, FaChartLine, FaLayerGroup, FaRobot, 
 import { FaXTwitter } from 'react-icons/fa6';
 import SocioVertexLogo from '../assets/logos/SocioVertex.svg';
 import { useAuth } from '../context/AuthContext.jsx';
+import CountUp from '../components/CountUp.jsx';
 
 const AuthPage = () => {
   const location = useLocation();
@@ -39,10 +40,10 @@ const AuthPage = () => {
             <li><FaShieldAlt /><span>Enterprise‑grade privacy & security</span></li>
           </ul>
           <div className="mk-stats" aria-label="Key platform scale stats">
-            <div className="mk-stat"><span className="num">105M+</span><span className="label">Profiles</span></div>
-            <div className="mk-stat"><span className="num">69M</span><span className="label">YouTube</span></div>
-            <div className="mk-stat"><span className="num">11M</span><span className="label">Instagram</span></div>
-            <div className="mk-stat"><span className="num">9.4M</span><span className="label">Twitter</span></div>
+            <div className="mk-stat"><span className="num"><CountUp value={105} suffix="M+" /></span><span className="label">Profiles</span></div>
+            <div className="mk-stat"><span className="num"><CountUp value={69} suffix="M" /></span><span className="label">YouTube</span></div>
+            <div className="mk-stat"><span className="num"><CountUp value={11} suffix="M" /></span><span className="label">Instagram</span></div>
+            <div className="mk-stat"><span className="num"><CountUp value={9.4} decimal={1} suffix="M" /></span><span className="label">Twitter</span></div>
           </div>
         </div>
         <div className="auth-card" role="region" aria-label={mode === 'login' ? 'Login form' : 'Signup form'}>
