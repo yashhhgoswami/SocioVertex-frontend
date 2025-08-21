@@ -620,7 +620,7 @@
 
 /* Features Section */
 .features {
-  padding: 7.25rem 1.5rem 6.5rem; /* extra top & more bottom so cards stay inside zone */
+  padding: 7.25rem 1.5rem 9.5rem; /* increased bottom padding for clear breathing room */
   background: linear-gradient(180deg, rgba(0,0,0,0.32), rgba(0,0,0,0.18));
   border-top: 1px solid rgba(255,255,255,0.06);
   border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -628,12 +628,21 @@
   position: relative;
   z-index: 2;
 }
+.features::after { /* subtle spacer fade to separate from next section */
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:0;
+  height:120px;
+  transform:translateY(100%);
+  background:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0));
+  pointer-events:none;
+}
 
 .features-content {
   max-width: 1152px;
   margin: 0 auto;
-  padding-top: 2.75rem; /* added spacing above section title */
-  padding-bottom: .5rem; /* buffer so bottom row stays above border */
+  padding-top: 2.75rem; /* spacing above section title */
+  padding-bottom: 1.25rem; /* increased buffer so bottom row sits higher */
 }
 
 .section-title {
@@ -702,7 +711,8 @@
 
 /* Pricing Section */
 .pricing {
-  padding: 5rem 1.5rem;
+  padding: 2.9rem 1.5rem 5.25rem; /* reduced top padding so heading sits closer to preceding border */
+  scroll-margin-top: 120px; /* keep anchor scroll comfortable below sticky nav */
 }
 
 .pricing-content {
