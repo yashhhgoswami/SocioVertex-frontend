@@ -916,3 +916,27 @@
   .hero-gradient-blob, .orb { animation:none !important; }
 }
 /* ==== End Revamped Hero ==== */
+
+/* ===== Scroll Reveal Animations ===== */
+.reveal { opacity:0; transform:translateY(34px); transition:opacity .9s cubic-bezier(.19,1,.22,1), transform 1s cubic-bezier(.19,1,.22,1), filter 1s; will-change:opacity,transform; }
+.reveal.is-visible { opacity:1; transform:translateY(0); filter:blur(0); }
+/* Directional variants */
+.reveal[data-reveal="left"] { transform:translateX(-40px); }
+.reveal[data-reveal="right"] { transform:translateX(40px); }
+.reveal[data-reveal="up"] { transform:translateY(42px); }
+.reveal[data-reveal="down"] { transform:translateY(-42px); }
+.reveal[data-reveal="zoom"] { transform:scale(.92); }
+.reveal[data-reveal="flip"] { transform:rotateX(25deg) translateY(40px); transform-origin:top; }
+.reveal[data-reveal="left"].is-visible,
+.reveal[data-reveal="right"].is-visible,
+.reveal[data-reveal="up"].is-visible,
+.reveal[data-reveal="down"].is-visible,
+.reveal[data-reveal="zoom"].is-visible,
+.reveal[data-reveal="flip"].is-visible { transform:none; }
+/* Slight stagger inside features grid if parent already has reveal */
+.features-grid .feature-card.reveal { background:rgba(255,255,255,0.045); }
+.features-grid .feature-card.reveal.is-visible { background:rgba(255,255,255,0.08); box-shadow:0 10px 26px -12px rgba(0,0,0,.55); }
+@media (prefers-reduced-motion: reduce){
+  .reveal { opacity:1 !important; transform:none !important; transition:none !important; }
+}
+/* ===== End Scroll Reveal ===== */

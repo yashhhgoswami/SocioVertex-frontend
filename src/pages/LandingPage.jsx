@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useScrollReveal } from '../hooks/useScrollReveal.js';
 import './LandingPage.css';
 import SocioVertexLogo from '../assets/logos/SocioVertex.svg';
 import { FaCreditCard, FaChartLine, FaFileAlt, FaTools, FaInstagram, FaLinkedinIn, FaYoutube, FaTwitch, FaFacebookF, FaChartPie, FaRobot, FaLayerGroup, FaBolt } from 'react-icons/fa';
@@ -20,6 +21,8 @@ const LandingPage = () => {
     document.addEventListener('mousedown', onDoc);
     return ()=>document.removeEventListener('mousedown', onDoc);
   },[menuOpen]);
+  // Scroll reveal init (runs once on mount)
+  useScrollReveal([]);
   return (
     <div className="landing-page">
       {/* Navigation Header */}
@@ -188,7 +191,7 @@ const LandingPage = () => {
       </nav>
 
       {/* Hero Section (revamped) */}
-      <section className="hero">
+  <section className="hero reveal" data-reveal="fade" data-reveal-once>
         {/* Decorative layers */}
         <div className="hero-bg" aria-hidden="true">
           <div className="grid-overlay" />
@@ -245,7 +248,7 @@ const LandingPage = () => {
       </section>
 
       {/* Platform Icons */}
-      <section className="platforms">
+  <section className="platforms reveal" data-reveal="up" data-reveal-delay="150">
         <div className="platforms-content">
           <p className="platforms-label">Supported Platforms</p>
           <div className="platform-icons modern">
@@ -261,44 +264,44 @@ const LandingPage = () => {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="features">
+  <section id="features" className="features reveal" data-reveal="fade" data-reveal-delay="200">
         <div className="features-content">
           <h2 className="section-title">
             Everything You Need to <span className="gradient-text">Grow</span>
           </h2>
           
           <div className="features-grid">
-            <div className="feature-card">
+            <div className="feature-card reveal" data-reveal="up" data-reveal-delay="0">
               <div className="feature-icon" aria-hidden="true"><FaChartPie /></div>
               <h3 className="feature-title">Unified Dashboard</h3>
               <p className="feature-description">View all your social media metrics in one place. Track followers, engagement, and performance across platforms.</p>
             </div>
 
-            <div className="feature-card">
+            <div className="feature-card reveal" data-reveal="up" data-reveal-delay="60">
               <div className="feature-icon" aria-hidden="true"><FaChartLine /></div>
               <h3 className="feature-title">Growth Analytics</h3>
               <p className="feature-description">Detailed insights into your audience growth, best performing content, and optimal posting times.</p>
             </div>
 
-            <div className="feature-card">
+            <div className="feature-card reveal" data-reveal="up" data-reveal-delay="120">
               <div className="feature-icon" aria-hidden="true"><FaRobot /></div>
               <h3 className="feature-title">AI Insights</h3>
               <p className="feature-description">Get AI-powered recommendations for content strategy, optimal posting schedules, and audience engagement.</p>
             </div>
 
-            <div className="feature-card">
+            <div className="feature-card reveal" data-reveal="up" data-reveal-delay="180">
               <div className="feature-icon" aria-hidden="true"><FaLayerGroup /></div>
               <h3 className="feature-title">Multi-Platform</h3>
               <p className="feature-description">Connect Twitter, Instagram, LinkedIn, and YouTube. More platforms coming soon.</p>
             </div>
 
-            <div className="feature-card">
+            <div className="feature-card reveal" data-reveal="up" data-reveal-delay="240">
               <div className="feature-icon" aria-hidden="true"><FaFileAlt /></div>
               <h3 className="feature-title">Automated Reports</h3>
               <p className="feature-description">Generate beautiful PDF reports and schedule them to be sent automatically to your email.</p>
             </div>
 
-            <div className="feature-card">
+            <div className="feature-card reveal" data-reveal="up" data-reveal-delay="300">
               <div className="feature-icon" aria-hidden="true"><FaBolt /></div>
               <h3 className="feature-title">Real-time Updates</h3>
               <p className="feature-description">Get instant notifications when your content goes viral or when there are significant changes in engagement.</p>
@@ -308,7 +311,7 @@ const LandingPage = () => {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="pricing">
+  <section id="pricing" className="pricing reveal" data-reveal="fade" data-reveal-delay="200">
         <div className="pricing-content">
           <h2 className="section-title">
             Simple <span className="gradient-text">Pricing</span>
