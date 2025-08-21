@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal.js';
 import './LandingPage.css';
 import SocioVertexLogo from '../assets/logos/SocioVertex.svg';
+import CountUp from '../components/CountUp.jsx';
 import { FaCreditCard, FaChartLine, FaFileAlt, FaTools, FaInstagram, FaLinkedinIn, FaYoutube, FaTwitch, FaFacebookF, FaChartPie, FaRobot, FaLayerGroup, FaBolt } from 'react-icons/fa';
 import { FaXTwitter, FaTiktok } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
@@ -23,6 +24,11 @@ const LandingPage = () => {
   },[menuOpen]);
   // Scroll reveal init (runs once on mount)
   useScrollReveal([]);
+  // Force initial stat animation only first load (simple session flag)
+  React.useEffect(()=>{
+    if(sessionStorage.getItem('heroStatsAnimated')) return; // CountUp components auto start immediately (startOnVisible=false)
+    sessionStorage.setItem('heroStatsAnimated','1');
+  },[]);
   return (
     <div className="landing-page">
       {/* Navigation Header */}
@@ -230,13 +236,13 @@ const LandingPage = () => {
           </div>
           {/* Quick Stats */}
           <div className="hero-stats" role="list" aria-label="Platform scale stats">
-            <div className="stat" role="listitem"><span className="stat-num">105M</span><span className="stat-label">Profiles Tracked</span></div>
-            <div className="stat" role="listitem"><span className="stat-num">69M</span><span className="stat-label">YouTube</span></div>
-            <div className="stat" role="listitem"><span className="stat-num">11M</span><span className="stat-label">Instagram</span></div>
-            <div className="stat" role="listitem"><span className="stat-num">9.4M</span><span className="stat-label">Twitter</span></div>
-            <div className="stat" role="listitem"><span className="stat-num">4.2M</span><span className="stat-label">LinkedIn</span></div>
-            <div className="stat" role="listitem"><span className="stat-num">3.5M</span><span className="stat-label">Facebook</span></div>
-            <div className="stat" role="listitem"><span className="stat-num">7.3M</span><span className="stat-label">Twitch</span></div>
+            <div className="stat" role="listitem"><span className="stat-num"><CountUp value={105} suffix="M" startOnVisible={false} /></span><span className="stat-label">Profiles Tracked</span></div>
+            <div className="stat" role="listitem"><span className="stat-num"><CountUp value={69} suffix="M" startOnVisible={false} /></span><span className="stat-label">YouTube</span></div>
+            <div className="stat" role="listitem"><span className="stat-num"><CountUp value={11} suffix="M" startOnVisible={false} /></span><span className="stat-label">Instagram</span></div>
+            <div className="stat" role="listitem"><span className="stat-num"><CountUp value={9.4} decimal={1} suffix="M" startOnVisible={false} /></span><span className="stat-label">Twitter</span></div>
+            <div className="stat" role="listitem"><span className="stat-num"><CountUp value={4.2} decimal={1} suffix="M" startOnVisible={false} /></span><span className="stat-label">LinkedIn</span></div>
+            <div className="stat" role="listitem"><span className="stat-num"><CountUp value={3.5} decimal={1} suffix="M" startOnVisible={false} /></span><span className="stat-label">Facebook</span></div>
+            <div className="stat" role="listitem"><span className="stat-num"><CountUp value={7.3} decimal={1} suffix="M" startOnVisible={false} /></span><span className="stat-label">Twitch</span></div>
           </div>
           <div className="hero-wave" aria-hidden="true">
             <svg viewBox="0 0 1440 180" preserveAspectRatio="none" className="wave-svg">
