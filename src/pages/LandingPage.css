@@ -620,15 +620,20 @@
 
 /* Features Section */
 .features {
-  padding: 5rem 1.5rem;
-  background: rgba(0,0,0,0.25);
-  border-top: 1px solid rgba(255,255,255,0.05);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 7.25rem 1.5rem 6.5rem; /* extra top & more bottom so cards stay inside zone */
+  background: linear-gradient(180deg, rgba(0,0,0,0.32), rgba(0,0,0,0.18));
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  scroll-margin-top: 120px; /* smoother anchor scroll positioning */
+  position: relative;
+  z-index: 2;
 }
 
 .features-content {
   max-width: 1152px;
   margin: 0 auto;
+  padding-top: 2.75rem; /* added spacing above section title */
+  padding-bottom: .5rem; /* buffer so bottom row stays above border */
 }
 
 .section-title {
@@ -640,8 +645,16 @@
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
+  align-items: stretch;
+}
+/* Force clean 3 x 2 layout for six feature cards on wide screens */
+@media (min-width: 960px){
+  .features-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1400px){
+  .features-grid { gap: 2.5rem; }
 }
 
 .feature-card {
@@ -651,6 +664,10 @@
   border: 1px solid rgba(168, 85, 247, 0.2);
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
+  display:flex;
+  flex-direction:column;
+  min-height: 300px;
+  position:relative;
 }
 
 .feature-card:hover {
@@ -679,6 +696,8 @@
 .feature-description {
   color: #d1d5db;
   line-height: 1.6;
+  flex-grow:1;
+  display:block;
 }
 
 /* Pricing Section */
