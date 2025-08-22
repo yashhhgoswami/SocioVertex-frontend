@@ -158,10 +158,10 @@ const LandingPage = () => {
                 <span className="dropdown-icon"><FaChartLine /></span>
                 Creator Consulting
               </Link>
-              <a href="#" className="dropdown-item">
+              <Link to="/reports" className="dropdown-item" style={{textDecoration:'none'}}>
                 <span className="dropdown-icon"><FaFileAlt /></span>
                 Custom Reports
-              </a>
+              </Link>
               <a href="#" className="dropdown-item">
                 <span className="dropdown-icon"><FaTools /></span>
                 Business API
