@@ -154,10 +154,10 @@ const LandingPage = () => {
                 <span className="dropdown-icon"><FaCreditCard /></span>
                 SocioVertex Membership
               </Link>
-              <a href="#" className="dropdown-item">
+              <Link to="/consulting" className="dropdown-item" style={{textDecoration:'none'}}>
                 <span className="dropdown-icon"><FaChartLine /></span>
                 Creator Consulting
-              </a>
+              </Link>
               <a href="#" className="dropdown-item">
                 <span className="dropdown-icon"><FaFileAlt /></span>
                 Custom Reports
