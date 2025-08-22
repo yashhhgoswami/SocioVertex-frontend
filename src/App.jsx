@@ -16,6 +16,7 @@ import ContactPage from './pages/ContactPage.jsx';
 import AboutPage from './pages/AboutPage.jsx';
 import MembershipPage from './pages/MembershipPage.jsx';
 import LinkedSocialPage from './pages/LinkedSocialPage.jsx';
+import ConsultingPage from './pages/ConsultingPage.jsx';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
       <Route path="/membership" element={<MembershipPage />} />
             <Route path="/linked" element={<ProtectedRoute><LinkedSocialPage /></ProtectedRoute>} />
+            <Route path="/consulting" element={<ConsultingPage />} />
           </Routes>
           <Footer />
         </div>

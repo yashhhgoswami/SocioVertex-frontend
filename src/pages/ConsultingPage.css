@@ -1,0 +1,68 @@
+/* Consulting Page Styles (aligned with global palette) */
+.consulting-page { min-height:100vh; background: var(--app-gradient); color:#fff; }
+
+.consult-hero { position:relative; padding:6.25rem 1.5rem 4.5rem; text-align:center; overflow:hidden; }
+.consult-hero .hero-inner { max-width:980px; margin:0 auto; position:relative; z-index:2; }
+.consult-hero h1 { font-size:clamp(2.6rem,6vw,4.2rem); line-height:1.05; font-weight:800; margin:0 0 1.25rem; }
+.consult-hero .grad { background:linear-gradient(45deg,var(--accent-start),var(--accent-end)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.consult-hero .lead { font-size:1.15rem; max-width:760px; margin:0 auto 2rem; color:#d5d9e2; }
+.hero-points { list-style:none; display:flex; flex-wrap:wrap; gap:.8rem .9rem; justify-content:center; margin:0 0 2.4rem; padding:0; }
+.hero-points li { background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.22); padding:.55rem .9rem .5rem; border-radius:30px; font-size:.72rem; letter-spacing:.8px; text-transform:uppercase; font-weight:600; backdrop-filter:blur(10px); }
+.primary-cta { display:inline-flex; align-items:center; gap:.55rem; background:linear-gradient(90deg,var(--accent-start),var(--accent-end)); color:#fff; padding:.9rem 1.4rem; border-radius:14px; text-decoration:none; font-weight:600; font-size:.95rem; box-shadow:0 10px 26px -10px rgba(192,0,255,.55); transition:.35s; position:relative; }
+.primary-cta:hover { transform:translateY(-3px); box-shadow:0 16px 40px -12px rgba(192,0,255,.65); }
+.primary-cta.alt { margin-top:1.2rem; }
+
+/* Decorative background */
+.consult-hero .hero-bg { position:absolute; inset:0; pointer-events:none; }
+.consult-hero .orb { position:absolute; border-radius:50%; filter:blur(70px); opacity:.45; mix-blend-mode:screen; }
+.consult-hero .orb-a { width:50vw; height:50vw; left:-15%; top:5%; background:radial-gradient(circle at 35% 35%, var(--accent-start), transparent 60%), radial-gradient(circle at 70% 70%, var(--accent-end), transparent 70%); animation:floatOrb 28s ease-in-out infinite; }
+.consult-hero .orb-b { width:45vw; height:45vw; right:-10%; top:18%; background:radial-gradient(circle at 30% 60%, var(--accent-end), transparent 55%), radial-gradient(circle at 70% 40%, #3a00b8, transparent 70%); animation:floatOrb 32s ease-in-out infinite reverse; }
+.consult-hero .mesh { position:absolute; inset:0; background:repeating-linear-gradient(90deg,rgba(255,255,255,0.04)0 1px,transparent 1px 140px), repeating-linear-gradient(0deg,rgba(255,255,255,0.04)0 1px,transparent 1px 120px); opacity:.3; mask:linear-gradient(180deg,#fff,transparent); }
+@keyframes floatOrb { 0%,100%{ transform:translateY(-12px);} 50%{ transform:translateY(18px);} }
+
+.consult-main { max-width:1200px; margin:0 auto; padding:2rem 1.6rem 5.5rem; }
+.section-title { font-size:2.2rem; text-align:center; font-weight:700; margin:0 0 3rem; }
+
+/* Engagement cards */
+.engagements-section { padding:4.5rem 0 2rem; position:relative; }
+.eng-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1.9rem; }
+.eng-card { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.16); border-radius:18px; padding:1.5rem 1.35rem 1.6rem; position:relative; display:flex; flex-direction:column; gap:.85rem; backdrop-filter:blur(12px) saturate(140%); transition:.35s; }
+.eng-card:hover { background:rgba(255,255,255,0.1); transform:translateY(-4px); box-shadow:0 14px 34px -14px rgba(0,0,0,.55); }
+.eng-ico { width:54px; height:54px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; background:linear-gradient(135deg,var(--accent-start),var(--accent-end)); border-radius:14px; box-shadow:0 6px 18px -6px rgba(192,0,255,.55); }
+.eng-card h3 { margin:0; font-size:1.05rem; letter-spacing:.4px; }
+.eng-card p { margin:0; font-size:.85rem; line-height:1.5; color:#d0d4de; }
+
+/* Process */
+.process-section { padding:4.5rem 0 1rem; }
+.process-steps { list-style:none; margin:0; padding:0; display:grid; gap:1.6rem; max-width:860px; margin-inline:auto; }
+.process-steps li { display:flex; gap:1.1rem; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.14); padding:1.1rem 1rem 1rem; border-radius:16px; position:relative; backdrop-filter:blur(10px); transition:.35s; }
+.process-steps li:hover { background:rgba(255,255,255,0.09); }
+.step-num { width:40px; height:40px; border-radius:12px; background:linear-gradient(135deg,var(--accent-start),var(--accent-end)); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:.95rem; box-shadow:0 6px 16px -6px rgba(192,0,255,.55); }
+.step-body strong { display:block; font-size:.88rem; letter-spacing:.5px; margin-bottom:.25rem; }
+.step-body p { font-size:.75rem; line-height:1.5; color:#c7cbd5; margin:0; }
+
+/* Why section */
+.why-section { padding:5rem 0 2rem; }
+.why-grid { display:grid; gap:1.8rem; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); }
+.why-card { background:linear-gradient(135deg,rgba(255,255,255,0.05),rgba(255,255,255,0.03)); border:1px solid rgba(255,255,255,0.14); border-radius:18px; padding:1.4rem 1.3rem 1.5rem; position:relative; backdrop-filter:blur(10px); transition:.35s; }
+.why-card:hover { background:rgba(255,255,255,0.08); transform:translateY(-4px); }
+.why-card h3 { margin:0 0 .6rem; font-size:1rem; letter-spacing:.5px; }
+.why-card p { margin:0; font-size:.82rem; line-height:1.5; color:#d0d4de; }
+
+/* CTA section */
+.cta-section { text-align:center; padding:6rem 0 2rem; }
+.cta-section h2 { font-size:2.4rem; margin:0 0 1rem; }
+.cta-section p { max-width:620px; margin:0 auto 1.5rem; color:#d5d9e2; }
+
+@media (max-width:860px){
+  .process-steps { gap:1.2rem; }
+  .process-steps li { flex-direction:column; }
+  .step-num { width:46px; height:46px; font-size:1.05rem; }
+}
+@media (max-width:640px){
+  .consult-hero { padding:5.5rem 1.2rem 3.5rem; }
+  .consult-hero h1 { font-size:clamp(2.4rem,9vw,3.7rem); }
+  .hero-points { flex-direction:column; align-items:stretch; }
+  .hero-points li { width:100%; text-align:center; }
+  .eng-grid, .why-grid { grid-template-columns:1fr; }
+}

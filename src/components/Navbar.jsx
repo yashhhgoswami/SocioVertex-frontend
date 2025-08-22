@@ -125,7 +125,7 @@ const Navbar = () => {
           <button className="dropdown-btn">Products and Services ▼</button>
           <div className="dropdown-menu">
             <Link to="/membership" className="dropdown-item"><span className="dropdown-icon"><FaCreditCard /></span>Membership</Link>
-            <a href="#" className="dropdown-item"><span className="dropdown-icon"><FaChartLine /></span>Consulting</a>
+            <Link to="/consulting" className="dropdown-item"><span className="dropdown-icon"><FaChartLine /></span>Consulting</Link>
             <a href="#" className="dropdown-item"><span className="dropdown-icon"><FaFileAlt /></span>Custom Reports</a>
             <a href="#" className="dropdown-item"><span className="dropdown-icon"><FaTools /></span>Business API</a>
           </div>
