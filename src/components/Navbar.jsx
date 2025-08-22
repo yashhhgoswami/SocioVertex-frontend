@@ -127,7 +127,7 @@ const Navbar = () => {
             <Link to="/membership" className="dropdown-item"><span className="dropdown-icon"><FaCreditCard /></span>Membership</Link>
             <Link to="/consulting" className="dropdown-item"><span className="dropdown-icon"><FaChartLine /></span>Consulting</Link>
             <Link to="/reports" className="dropdown-item"><span className="dropdown-icon"><FaFileAlt /></span>Custom Reports</Link>
-            <a href="#" className="dropdown-item"><span className="dropdown-icon"><FaTools /></span>Business API</a>
+            <Link to="/api" className="dropdown-item"><span className="dropdown-icon"><FaTools /></span>Business API</Link>
           </div>
         </div>
   <Link to="/contact" className="nav-link">Contact Us</Link>

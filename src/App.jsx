@@ -18,6 +18,7 @@ import MembershipPage from './pages/MembershipPage.jsx';
 import LinkedSocialPage from './pages/LinkedSocialPage.jsx';
 import ConsultingPage from './pages/ConsultingPage.jsx';
 import CustomReportsPage from './pages/CustomReportsPage.jsx';
+import BusinessAPIPage from './pages/BusinessAPIPage.jsx';
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
             <Route path="/linked" element={<ProtectedRoute><LinkedSocialPage /></ProtectedRoute>} />
             <Route path="/consulting" element={<ConsultingPage />} />
             <Route path="/reports" element={<CustomReportsPage />} />
+            <Route path="/api" element={<BusinessAPIPage />} />
           </Routes>
           <Footer />
         </div>

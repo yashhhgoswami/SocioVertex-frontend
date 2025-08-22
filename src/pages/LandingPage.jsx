@@ -162,10 +162,10 @@ const LandingPage = () => {
                 <span className="dropdown-icon"><FaFileAlt /></span>
                 Custom Reports
               </Link>
-              <a href="#" className="dropdown-item">
+              <Link to="/api" className="dropdown-item" style={{textDecoration:'none'}}>
                 <span className="dropdown-icon"><FaTools /></span>
                 Business API
-              </a>
+              </Link>
             </div>
           </div>
           <Link to="/contact" className="nav-link">Contact Us</Link>
