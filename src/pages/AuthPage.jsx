@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useScrollReveal } from '../hooks/useScrollReveal.js';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import './AuthPage.css';
 import { FaGoogle, FaGithub, FaCheckCircle, FaChartLine, FaLayerGroup, FaRobot, FaShieldAlt } from 'react-icons/fa';
@@ -26,11 +27,12 @@ const AuthPage = () => {
     setMode(prev => prev === qMode ? prev : qMode);
   }, [location.search]);
   const toggle = (m) => setMode(m);
+  useScrollReveal([mode]);
   return (
-    <div className="auth-shell">
+    <div className="auth-shell reveal" data-reveal="fade" data-reveal-once>
       <div className="auth-bg" aria-hidden="true" />
       <div className="auth-layout">
-        <div className="marketing">
+        <div className="marketing reveal" data-reveal="left" data-reveal-once>
           <h2 className="mk-headline">Grow <span className="mk-gradient">Smarter</span><br /> Across Platforms</h2>
           <p className="mk-sub">Unified insights + AI guidance — all in one secure hub.</p>
           <ul className="mk-bullets">
@@ -46,7 +48,7 @@ const AuthPage = () => {
             <div className="mk-stat"><span className="num"><CountUp value={9.4} decimal={1} suffix="M" /></span><span className="label">Twitter</span></div>
           </div>
         </div>
-        <div className="auth-card" role="region" aria-label={mode === 'login' ? 'Login form' : 'Signup form'}>
+        <div className="auth-card reveal" data-reveal="up" data-reveal-once role="region" aria-label={mode === 'login' ? 'Login form' : 'Signup form'}>
           <div className="auth-panel-header">
             <img src={SocioVertexLogo} alt="SocioVertex" style={{height:42, marginBottom:14}} />
             <h1>{mode === 'login' ? 'Welcome Back' : 'Create Your Account'}</h1>

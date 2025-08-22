@@ -3,6 +3,7 @@ import './LinkedSocialPage.css';
 import { FaYoutube, FaInstagram, FaLinkedinIn, FaTwitter, FaTwitch, FaFacebook, FaTiktok, FaPlug, FaUnlink, FaSyncAlt, FaCheckCircle, FaExclamationTriangle, FaShieldAlt, FaLock, FaClock, FaChartLine, FaRobot } from 'react-icons/fa';
 import Navbar from '../components/Navbar.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
+import { useScrollReveal } from '../hooks/useScrollReveal.js';
 
 // Providers config
 const PROVIDERS = [
@@ -31,6 +32,7 @@ export default function LinkedSocialPage(){
 	const [accounts, setAccounts] = useState(initialLinked);
 	const [busy, setBusy] = useState(null);
 	const [, setTick] = useState(0);
+	useScrollReveal([accounts]);
 
 	// Refresh relative time every minute
 	useEffect(()=>{ const id=setInterval(()=>setTick(t=>t+1),60_000); return ()=>clearInterval(id); },[]);
@@ -55,19 +57,19 @@ export default function LinkedSocialPage(){
 	return (
 		<div className="linked-page">
 			<Navbar />
-			<header className="linked-hero">
+			<header className="linked-hero reveal" data-reveal="fade" data-reveal-once>
 				<h1>Linked Social Media</h1>
 				<p className="lead">Securely connect your social profiles to unify analytics, automate reporting and unlock AI optimization.</p>
-				<div className="aggregate-cards">
-					<div className="agg-card"><span className="agg-label">Accounts Linked</span><span className="agg-value">{linkedCount}</span></div>
-					<div className="agg-card"><span className="agg-label">Total Followers</span><span className="agg-value">{totalFollowers.toLocaleString()}</span></div>
-						<div className="agg-card"><span className="agg-label">Total Posts Tracked</span><span className="agg-value">{totalPosts.toLocaleString()}</span></div>
-				</div>
+					<div className="aggregate-cards reveal" data-reveal="up" data-reveal-once>
+						<div className="agg-card reveal" data-reveal="up" data-reveal-delay="0" data-reveal-once><span className="agg-label">Accounts Linked</span><span className="agg-value">{linkedCount}</span></div>
+						<div className="agg-card reveal" data-reveal="up" data-reveal-delay="80" data-reveal-once><span className="agg-label">Total Followers</span><span className="agg-value">{totalFollowers.toLocaleString()}</span></div>
+							<div className="agg-card reveal" data-reveal="up" data-reveal-delay="160" data-reveal-once><span className="agg-label">Total Posts Tracked</span><span className="agg-value">{totalPosts.toLocaleString()}</span></div>
+					</div>
 			</header>
 			<main className="linked-main">
-				<section className="providers">
+					<section className="providers reveal" data-reveal="fade" data-reveal-once>
 					<h2 className="section-heading">Manage Connections</h2>
-					<div className="providers-grid">
+						<div className="providers-grid">
 						{PROVIDERS.map(p=>{
 							const data = accounts[p.key];
 							const status = data?.status;
@@ -100,7 +102,7 @@ export default function LinkedSocialPage(){
 						})}
 					</div>
 				</section>
-				<section className="how-it-works">
+				<section className="how-it-works reveal" data-reveal="fade" data-reveal-once>
 					<h2 className="section-heading">How It Works</h2>
 					<ul className="steps icon-steps">
 						<li>
@@ -125,7 +127,7 @@ export default function LinkedSocialPage(){
 						</li>
 					</ul>
 				</section>
-				<section className="next-suggestions">
+				<section className="next-suggestions reveal" data-reveal="fade" data-reveal-once>
 					<h2 className="section-heading">Next Suggestions</h2>
 					<div className="suggest-grid">
 						{PROVIDERS.filter(p=>!accounts[p.key]).length===0 && <p style={{gridColumn:'1 / -1'}}>All available platforms linked. Coverage maxed!</p>}

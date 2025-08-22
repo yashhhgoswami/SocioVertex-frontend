@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { useScrollReveal } from '../hooks/useScrollReveal.js';
 import { useAuth } from '../context/AuthContext.jsx';
 import Navbar from '../components/Navbar.jsx';
 import './Dashboard.css';
@@ -68,6 +69,7 @@ function PieChart({ data }) {
 export default function Dashboard() {
   const { user } = useAuth();
   const [range, setRange] = useState('month');
+  useScrollReveal([range]);
 
   // Demo analytics (placeholder) - replace with real fetched metrics later
   const growthData = useMemo(()=> {
@@ -101,9 +103,9 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="dashboard-page">
+    <div className="dashboard-page reveal" data-reveal="fade" data-reveal-once>
       <Navbar />
-      <header className="dash-header">
+      <header className="dash-header reveal" data-reveal="down" data-reveal-once>
         <div className="dash-header-main">
           <h1 className="dash-title">Creator Analytics</h1>
           <p className="dash-sub">Welcome back <strong>{user?.displayName || user?.email?.split('@')[0]}</strong>, here is your unified performance snapshot.</p>
@@ -115,9 +117,9 @@ export default function Dashboard() {
         </div>
       </header>
 
-      <section className="kpi-grid">
-        {kpis.map(k=> (
-          <div key={k.label} className="kpi-card">
+      <section className="kpi-grid reveal" data-reveal="up" data-reveal-once>
+        {kpis.map((k,i)=> (
+          <div key={k.label} className="kpi-card reveal" data-reveal="up" data-reveal-delay={i*80} data-reveal-once>
             <div className="kpi-label">{k.label}</div>
             <div className="kpi-value">{k.value}</div>
             <div className={`kpi-delta ${k.tone}`}>{k.delta}</div>
@@ -125,8 +127,8 @@ export default function Dashboard() {
         ))}
       </section>
 
-      <div className="dash-main-grid">
-        <div className="panel large">
+      <div className="dash-main-grid reveal" data-reveal="fade" data-reveal-once>
+        <div className="panel large reveal" data-reveal="up" data-reveal-delay="40" data-reveal-once>
           <div className="panel-head">
             <h3>Growth Overview</h3>
             <span className="mini-label">Followers over selected range</span>
@@ -134,17 +136,17 @@ export default function Dashboard() {
           <LineChart data={growthData} />
         </div>
 
-        <div className="panel medium">
+        <div className="panel medium reveal" data-reveal="up" data-reveal-delay="120" data-reveal-once>
           <div className="panel-head"><h3>Weekly Activity</h3><span className="mini-label">Posts / uploads</span></div>
           <BarChart data={weeklyBars} colors={['#a000ff','#ff35d8','#34d0ff','#ff9f2f']} />
         </div>
 
-        <div className="panel medium">
+        <div className="panel medium reveal" data-reveal="up" data-reveal-delay="200" data-reveal-once>
           <div className="panel-head"><h3>Audience Split</h3><span className="mini-label">By platform</span></div>
           <PieChart data={audiencePie} />
         </div>
 
-        <div className="panel wide">
+        <div className="panel wide reveal" data-reveal="up" data-reveal-delay="280" data-reveal-once>
           <div className="panel-head"><h3>Recent Content Performance</h3></div>
           <table className="posts-table">
             <thead>
@@ -164,7 +166,7 @@ export default function Dashboard() {
           </table>
         </div>
 
-        <div className="panel compact">
+  <div className="panel compact reveal" data-reveal="up" data-reveal-delay="360" data-reveal-once>
           <div className="panel-head"><h3>Actionable Tips</h3></div>
           <ul className="tips-list">
             <li>Reels posted between 6-8pm gained 18% more engagement last week.</li>
@@ -173,7 +175,7 @@ export default function Dashboard() {
           </ul>
         </div>
 
-        <div className="panel compact">
+  <div className="panel compact reveal" data-reveal="up" data-reveal-delay="420" data-reveal-once>
           <div className="panel-head"><h3>Platform Health</h3></div>
           <ul className="health-metrics">
             <li><span>YouTube Growth</span><strong className="metric good">+12%</strong></li>

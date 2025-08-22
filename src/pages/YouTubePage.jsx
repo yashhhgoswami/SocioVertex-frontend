@@ -1,4 +1,5 @@
 import React from 'react';
+import { useScrollReveal } from '../hooks/useScrollReveal.js';
 import './YouTubePage.css';
 
 const sampleCreators = [
@@ -8,14 +9,15 @@ const sampleCreators = [
 ];
 
 export default function YouTubePage() {
+  useScrollReveal([]);
   return (
-    <div className="yt-layout">
-      <aside className="yt-sidebar">
+    <div className="yt-layout reveal" data-reveal="fade" data-reveal-once>
+      <aside className="yt-sidebar reveal" data-reveal="left" data-reveal-once>
         <div className="yt-suggestions">
           <div className="yt-suggestions-header">YouTube Suggestions</div>
           <ul className="yt-suggestion-list">
             {sampleCreators.map(c => (
-              <li key={c.rank} className="yt-suggestion-item">
+              <li key={c.rank} className="yt-suggestion-item reveal" data-reveal="up" data-reveal-delay={c.rank*70} data-reveal-once>
                 <div className="yt-avatar" aria-hidden></div>
                 <div className="yt-suggestion-meta">
                   <span className="yt-name">{c.name}</span>
@@ -26,9 +28,9 @@ export default function YouTubePage() {
           </ul>
         </div>
       </aside>
-      <main className="yt-main">
-        <div className="yt-card">
-          <header className="yt-card-header">
+      <main className="yt-main reveal" data-reveal="up" data-reveal-once>
+        <div className="yt-card reveal" data-reveal="fade" data-reveal-delay="120" data-reveal-once>
+          <header className="yt-card-header reveal" data-reveal="down" data-reveal-delay="180" data-reveal-once>
             <h2>Top YouTube Creators by SocioVertex Rank</h2>
             <span className="yt-latency">42ms</span>
           </header>
