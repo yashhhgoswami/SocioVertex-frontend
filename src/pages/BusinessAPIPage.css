@@ -15,6 +15,11 @@
 .api-main { max-width:1180px; margin:0 auto; padding:2rem 1.6rem 5.5rem; }
 .section-title { font-size:1.95rem; text-align:center; font-weight:700; margin:0 0 2.4rem; }
 
+/* Add spacing above main sections so headings don't sit too close to preceding content */
+.features-section, .usage-section, .dev-section, .scale-section, .pricing-cta { padding-top:3.2rem; }
+.features-section .section-title, .usage-section .section-title, .dev-section .section-title, .scale-section .section-title { margin-top:1.6rem; }
+.section-title { padding-top:0.8rem; }
+
 .features-grid { display:grid; gap:1.4rem; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); }
 .feature-card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.12); padding:1.2rem; border-radius:14px; display:flex; gap:.9rem; align-items:flex-start; transition:.28s; }
 .feature-card:hover { transform:translateY(-4px); background:rgba(255,255,255,0.06); }
