@@ -1,5 +1,11 @@
 /* Consulting Page Styles (aligned with global palette) */
-.consulting-page { min-height:100vh; background: var(--app-gradient); color:#fff; }
+/* Use layered gradient (app gradient + subtle radial overlay) similar to Linked Social page for smoother color flow */
+.consulting-page { 
+  min-height:100vh; 
+  background:var(--app-gradient),radial-gradient(circle at 65% 12%,rgba(255,255,255,0.055),rgba(0,0,0,0) 62%); 
+  background-blend-mode:overlay; 
+  color:#fff; 
+}
 
 .consult-hero { position:relative; padding:6.25rem 1.5rem 4.5rem; text-align:center; overflow:hidden; }
 .consult-hero .hero-inner { max-width:980px; margin:0 auto; position:relative; z-index:2; }
@@ -17,7 +23,10 @@
 .consult-hero .orb { position:absolute; border-radius:50%; filter:blur(70px); opacity:.45; mix-blend-mode:screen; }
 .consult-hero .orb-a { width:50vw; height:50vw; left:-15%; top:5%; background:radial-gradient(circle at 35% 35%, var(--accent-start), transparent 60%), radial-gradient(circle at 70% 70%, var(--accent-end), transparent 70%); animation:floatOrb 28s ease-in-out infinite; }
 .consult-hero .orb-b { width:45vw; height:45vw; right:-10%; top:18%; background:radial-gradient(circle at 30% 60%, var(--accent-end), transparent 55%), radial-gradient(circle at 70% 40%, #3a00b8, transparent 70%); animation:floatOrb 32s ease-in-out infinite reverse; }
-.consult-hero .mesh { position:absolute; inset:0; background:repeating-linear-gradient(90deg,rgba(255,255,255,0.04)0 1px,transparent 1px 140px), repeating-linear-gradient(0deg,rgba(255,255,255,0.04)0 1px,transparent 1px 120px); opacity:.3; mask:linear-gradient(180deg,#fff,transparent); }
+.consult-hero .mesh { position:absolute; inset:0; background:repeating-linear-gradient(90deg,rgba(255,255,255,0.04)0 1px,transparent 1px 140px), repeating-linear-gradient(0deg,rgba(255,255,255,0.04)0 1px,transparent 1px 120px); opacity:.28; mask:linear-gradient(180deg,#fff,transparent); }
+
+/* Soft transition band to further reduce any perceived hard break below hero */
+.consult-hero:after { content:""; position:absolute; left:0; right:0; bottom:0; height:140px; background:linear-gradient(180deg, rgba(40,0,70,0.15), rgba(0,0,0,0)); pointer-events:none; }
 @keyframes floatOrb { 0%,100%{ transform:translateY(-12px);} 50%{ transform:translateY(18px);} }
 
 .consult-main { max-width:1200px; margin:0 auto; padding:2rem 1.6rem 5.5rem; }
