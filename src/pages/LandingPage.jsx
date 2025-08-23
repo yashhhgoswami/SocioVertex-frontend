@@ -29,6 +29,37 @@ const LandingPage = () => {
     if(sessionStorage.getItem('heroStatsAnimated')) return; // CountUp components auto start immediately (startOnVisible=false)
     sessionStorage.setItem('heroStatsAnimated','1');
   },[]);
+  // YouTube search state
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchLoading, setSearchLoading] = useState(false);
+  const [searchError, setSearchError] = useState('');
+  const [ytStats, setYtStats] = useState(null);
+
+  async function runAnalyze() {
+    if(!searchQuery.trim()) return;
+    setSearchLoading(true); setSearchError(''); setYtStats(null);
+    try {
+      const res = await fetch(`http://localhost:3000/public/youtube/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      if(!res.ok) throw new Error((await res.json()).error || 'Search failed');
+      const data = await res.json();
+      setYtStats(data.stats);
+      // Fetch summary with deltas
+      if(data.stats?.channel_id){
+        const summaryRes = await fetch(`http://localhost:3000/public/youtube/channel/${data.stats.channel_id}/summary`);
+        if(summaryRes.ok){
+          const summary = await summaryRes.json();
+          setYtStats(s => ({ ...s, summary }));
+        }
+      }
+    } catch(e){
+      setSearchError(e.message);
+    } finally {
+      setSearchLoading(false);
+    }
+  }
+
+  function onKey(e){ if(e.key==='Enter') { runAnalyze(); } }
+
   return (
     <div className="landing-page">
       {/* Navigation Header */}
@@ -222,12 +253,34 @@ const LandingPage = () => {
             <div className="search-box">
               <input
                 type="text"
-                placeholder="Search a creator or paste a profile URL..."
+                placeholder="Search YouTube creator name, handle (@name) or channel ID..."
                 className="search-input"
+                value={searchQuery}
+                onChange={e=>setSearchQuery(e.target.value)}
+                onKeyDown={onKey}
+                disabled={searchLoading}
               />
-              <button className="search-btn">Analyze</button>
+              <button className="search-btn" onClick={runAnalyze} disabled={searchLoading}>{searchLoading? '...' : 'Analyze'}</button>
             </div>
+            {searchError && <div className="search-error" style={{color:'#ff4d6d', marginTop:'6px'}}>{searchError}</div>}
           </div>
+          {ytStats && (
+            <div className="analyze-result-card reveal" data-reveal="up" data-reveal-once style={{marginTop:'1.5rem'}}>
+              <div className="result-header">
+                <h3 style={{margin:0}}>{ytStats.title}</h3>
+                {ytStats.summary?.grade && <span className="grade-pill">{ytStats.summary.grade}</span>}
+              </div>
+              <div className="result-grid">
+                <div className="metric"><span className="metric-label">Subscribers</span><span className="metric-value">{Intl.NumberFormat().format(ytStats.subscriber_count)}</span>{ytStats.summary && <span className="metric-delta">Δ30d {formatDelta(ytStats.summary.subs30)}</span>}</div>
+                <div className="metric"><span className="metric-label">Views</span><span className="metric-value">{Intl.NumberFormat().format(ytStats.view_count)}</span>{ytStats.summary && <span className="metric-delta">Δ30d {formatDelta(ytStats.summary.views30)}</span>}</div>
+                <div className="metric"><span className="metric-label">Videos</span><span className="metric-value">{Intl.NumberFormat().format(ytStats.video_count)}</span></div>
+                {ytStats.summary?.estimatedMonthlyEarnings && (
+                  <div className="metric"><span className="metric-label">Est. Monthly</span><span className="metric-value">${ytStats.summary.estimatedMonthlyEarnings.low.toLocaleString()} - ${ytStats.summary.estimatedMonthlyEarnings.high.toLocaleString()}</span></div>
+                )}
+              </div>
+              <div className="mini-note">Early preview – data cached. Refreshing again adds a new snapshot.</div>
+            </div>
+          )}
           {/* CTA Buttons */}
           <div className="cta-buttons hero-ctas">
             {!user && <Link to="/auth?mode=signup" className="btn-primary large shadow-pop" style={{textDecoration:'none'}}>Get Started Free</Link>}
@@ -359,3 +412,10 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
+
+// Helpers
+function formatDelta(v){
+  if(v === 0) return '0';
+  const sign = v > 0 ? '+' : '';
+  return sign + Intl.NumberFormat().format(v);
+}

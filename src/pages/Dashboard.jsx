@@ -1,7 +1,8 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal.js';
 import { useAuth } from '../context/AuthContext.jsx';
 import Navbar from '../components/Navbar.jsx';
+import { fetchMyAnalytics } from '../api/backend.js';
 import './Dashboard.css';
 
 // Lightweight SVG chart helpers (no external libs to keep bundle small)
@@ -69,7 +70,26 @@ function PieChart({ data }) {
 export default function Dashboard() {
   const { user } = useAuth();
   const [range, setRange] = useState('month');
+  const [analytics, setAnalytics] = useState(null);
+  const [loadingAnalytics, setLoadingAnalytics] = useState(false);
+  const [analyticsError, setAnalyticsError] = useState(null);
   useScrollReveal([range]);
+
+  useEffect(()=> {
+    let ignore = false;
+    async function load() {
+      setLoadingAnalytics(true); setAnalyticsError(null);
+      try {
+        const data = await fetchMyAnalytics();
+        if(!ignore) setAnalytics(data);
+      } catch(e){
+        if(!ignore) setAnalyticsError(e.message);
+      } finally { if(!ignore) setLoadingAnalytics(false); }
+    }
+    // only try if user exists (session cookie separate from firebase user, but guard anyway)
+    if (user) load();
+    return ()=> { ignore = true; };
+  }, [user]);
 
   // Demo analytics (placeholder) - replace with real fetched metrics later
   const growthData = useMemo(()=> {
@@ -89,10 +109,10 @@ export default function Dashboard() {
   ];
 
   const kpis = [
-    { label: 'Total Reach', value: '1.2M', delta: '+4.7%', tone:'up' },
-    { label: 'Avg Engagement', value: '6.3%', delta: '+0.4%', tone:'up' },
-    { label: 'New Followers', value: '8,642', delta: '+12%', tone:'up' },
-    { label: 'Content Published', value: '57', delta: '-3%', tone:'down' },
+    { label: 'Total Likes (Twitter)', value: analytics? analytics.totalLikes : '—', delta: '', tone:'up' },
+    { label: 'Total Retweets', value: analytics? analytics.totalRetweets : '—', delta: '', tone:'up' },
+    { label: 'Top Post Likes', value: analytics?.topPost ? analytics.topPost.like_count : '—', delta: '', tone:'up' },
+    { label: 'Content Processed', value: analytics? (analytics.totalLikes+analytics.totalRetweets>0? 'Yes':'Pending') : '—', delta: '', tone:'up' },
   ];
 
   const recentPosts = [
@@ -105,6 +125,8 @@ export default function Dashboard() {
   return (
     <div className="dashboard-page reveal" data-reveal="fade" data-reveal-once>
       <Navbar />
+      {analyticsError && <div className="panel" style={{margin:'1rem',color:'var(--danger)'}}>Analytics Error: {analyticsError}</div>}
+      {loadingAnalytics && <div className="panel" style={{margin:'1rem'}}>Loading analytics...</div>}
       <header className="dash-header reveal" data-reveal="down" data-reveal-once>
         <div className="dash-header-main">
           <h1 className="dash-title">Creator Analytics</h1>
