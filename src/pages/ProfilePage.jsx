@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
 import './ProfilePage.css';
-import { FaPen, FaAward, FaUserCircle, FaChartLine, FaLink, FaShareAlt, FaEdit } from 'react-icons/fa';
+import { FaPen, FaAward, FaUserCircle, FaChartLine, FaLink, FaShareAlt, FaEdit, FaTimes } from 'react-icons/fa';
+import { fetchBackendProfile, updateProfile, uploadAvatar } from '../api/backend.js';
 
 const SectionCard = ({ title, actionLabel = 'Edit', children, compact }) => (
   <div className={`pp-section ${compact ? 'compact' : ''}`}>
@@ -15,22 +16,81 @@ const SectionCard = ({ title, actionLabel = 'Edit', children, compact }) => (
 );
 
 const ProfilePage = () => {
-  const { user } = useAuth();
-  const displayName = user?.displayName || (user?.email ? user.email.split('@')[0] : 'Creator');
+  const { user } = useAuth(); // Firebase user (for auth gating only in this hybrid model)
+  const [backendUser, setBackendUser] = useState(null);
+  const [loadingProfile, setLoadingProfile] = useState(true);
+  const [editing, setEditing] = useState(false);
+  const [form, setForm] = useState({ display_name: '', bio: '', about: '' });
+  const [saving, setSaving] = useState(false);
+  const [avatarUploading, setAvatarUploading] = useState(false);
+  const [error, setError] = useState('');
+
+  // Load backend session profile (if user has a backend session via passport)
+  useEffect(()=>{
+    let active = true;
+    (async ()=>{
+      try {
+        const data = await fetchBackendProfile();
+        if(active && data.user){
+          setBackendUser(data.user);
+        }
+      } catch(e){ /* ignore */ } finally {
+        if(active) setLoadingProfile(false);
+      }
+    })();
+    return ()=>{ active=false; };
+  },[]);
+
+  const displayName = backendUser?.display_name || user?.displayName || (user?.email ? user.email.split('@')[0] : 'Creator');
+  const avatarUrl = backendUser?.avatar_url ? (backendUser.avatar_url.startsWith('http')? backendUser.avatar_url : 'http://localhost:3000'+backendUser.avatar_url) : null;
   const avatarLetter = displayName.charAt(0).toUpperCase();
-  const handleShare = () => {
-    navigator.clipboard.writeText(window.location.href).catch(()=>{});
+  const handleShare = () => { navigator.clipboard.writeText(window.location.href).catch(()=>{}); };
+
+  const openEdit = () => {
+    setForm({
+      display_name: backendUser?.display_name || displayName,
+      bio: backendUser?.bio || '',
+      about: backendUser?.about || ''
+    });
+    setEditing(true);
+    setError('');
   };
+  const handleChange = e => setForm(f=>({...f,[e.target.name]: e.target.value}));
+  const saveProfile = async (e) => {
+    e.preventDefault();
+    setSaving(true); setError('');
+    try {
+      const { user: updated } = await updateProfile(form);
+      setBackendUser(updated);
+      setEditing(false);
+    } catch(err){ setError(err.message||'Save failed'); }
+    finally { setSaving(false); }
+  };
+  const handleAvatarPick = async (e) => {
+    const file = e.target.files?.[0];
+    if(!file) return;
+    if(file.size > 2*1024*1024){ setError('Avatar too large (max 2MB)'); return; }
+    setAvatarUploading(true); setError('');
+    try {
+      const { user: updated } = await uploadAvatar(file);
+      setBackendUser(updated);
+    } catch(err){ setError(err.message||'Upload failed'); }
+    finally { setAvatarUploading(false); }
+  };
+  const connected = !!backendUser;
   return (
     <div className="profile-layout">
       <Navbar />
       <div className="profile-cover">
         <div className="profile-cover-overlay" />
         <div className="profile-core">
-          <div className="profile-avatar-wrap">
-            <div className="profile-avatar">{avatarLetter}</div>
-            <button className="avatar-edit" aria-label="Change avatar"><FaPen /></button>
-          </div>
+            <div className="profile-avatar-wrap">
+              {avatarUrl ? <img src={avatarUrl} alt={displayName} className="profile-avatar img" /> : <div className="profile-avatar">{avatarLetter}</div>}
+              <label className="avatar-edit" aria-label="Change avatar">
+                {avatarUploading ? '...' : <FaPen />}
+                <input type="file" accept="image/*" style={{display:'none'}} onChange={handleAvatarPick} />
+              </label>
+            </div>
           <div className="profile-identity">
             <h1>{displayName}</h1>
             <p className="handle">@{displayName.toLowerCase()}</p>
@@ -43,7 +103,7 @@ const ProfilePage = () => {
             </div>
           </div>
           <div className="profile-actions">
-            <button className="btn ghost" type="button"><FaPen /> Edit Profile</button>
+            <button className="btn ghost" type="button" onClick={openEdit} disabled={!connected}><FaPen /> Edit Profile</button>
             <button className="btn primary" type="button" onClick={handleShare}><FaShareAlt /> Share</button>
           </div>
         </div>
@@ -58,7 +118,7 @@ const ProfilePage = () => {
       <div className="profile-main-grid">
         <main className="profile-main">
           <SectionCard title="About" actionLabel="Edit About">
-            <p>Welcome to my analytics hub! I analyze multi-platform creator performance and experiment with AI-assisted content strategies. Passionate about data visualization, growth loops, and community building.</p>
+            <p>{backendUser?.about || 'Add an about section to let others know your focus and value proposition.'}</p>
           </SectionCard>
           <SectionCard title="Recent Performance" actionLabel="View All">
             <div className="metric-row">
@@ -110,6 +170,34 @@ const ProfilePage = () => {
           </div>
         </aside>
       </div>
+    {editing && (
+      <div className="modal-overlay">
+        <div className="modal profile-edit-modal">
+          <button className="modal-close" onClick={()=>setEditing(false)}><FaTimes /></button>
+          <h2>Edit Profile</h2>
+          {!connected && <div className="warn">You are not connected to backend session. Log in via social auth for persistent profile.</div>}
+          {error && <div className="error-box">{error}</div>}
+          <form onSubmit={saveProfile} className="edit-form">
+            <label>
+              <span>Display Name</span>
+              <input name="display_name" value={form.display_name} onChange={handleChange} maxLength={60} />
+            </label>
+            <label>
+              <span>Bio (short tagline)</span>
+              <input name="bio" value={form.bio} onChange={handleChange} maxLength={160} />
+            </label>
+            <label>
+              <span>About (longer description)</span>
+              <textarea name="about" value={form.about} onChange={handleChange} rows={5} />
+            </label>
+            <div className="modal-actions">
+              <button type="button" className="btn ghost" onClick={()=>setEditing(false)}>Cancel</button>
+              <button className="btn primary" disabled={saving}>{saving? 'Saving...' : 'Save Changes'}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    )}
     </div>
   );
 };

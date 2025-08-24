@@ -2,6 +2,44 @@
 .yt-layout { display: flex; min-height: calc(100vh - 70px); background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0) 70%); color:#fff; font-family: system-ui, sans-serif; }
 .yt-sidebar { width: 300px; background: rgba(0,0,0,0.35); border-right:1px solid rgba(255,255,255,0.12); padding:1rem .75rem; overflow-y:auto; backdrop-filter: blur(10px); }
 .yt-suggestions-header { font-weight:700; font-size:.9rem; padding:.65rem .75rem; border:1px solid rgba(255,255,255,0.22); border-radius:10px; display:flex; align-items:center; gap:.5rem; background:linear-gradient(90deg,rgba(192,0,255,.25),rgba(255,42,223,.25)); }
+
+.yt-search-form {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	margin-bottom: 1rem;
+}
+.yt-search-form input {
+	padding: 0.55rem 0.75rem;
+	border-radius: 6px;
+	border: 1px solid #444;
+	background: #111;
+	color: #eee;
+}
+.yt-search-form button {
+	background: linear-gradient(135deg,#ff4242,#ff8c42);
+	border: none;
+	padding: 0.6rem 0.9rem;
+	border-radius: 6px;
+	font-weight: 600;
+	cursor: pointer;
+	color: #fff;
+}
+.yt-search-form button:disabled {
+	opacity: .5;
+	cursor: not-allowed;
+}
+.yt-error { color: #ff6060; font-size: .85rem; margin-bottom: .5rem; }
+.yt-channel-mini { display:flex; gap:.6rem; align-items:center; margin-top:.25rem; }
+.yt-channel-mini .yt-avatar { width:40px; height:40px; background-size:cover; background-position:center; border-radius:50%; background:#222; }
+.yt-placeholder { opacity:.6; font-style:italic; }
+.yt-stats-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(130px,1fr)); gap:1rem; margin-top:1rem; }
+.yt-stat { background:#111; padding:.75rem .9rem; border-radius:8px; display:flex; flex-direction:column; gap:.25rem; }
+.yt-stat span { font-size:.7rem; text-transform:uppercase; letter-spacing:.08em; opacity:.65; }
+.yt-stat strong { font-size:1.05rem; font-weight:600; }
+.yt-history { margin-top:1.5rem; }
+.yt-history-chart { display:flex; align-items:flex-end; gap:2px; height:140px; background:#111; padding:6px 6px 0; border-radius:8px; overflow:hidden; }
+.yt-bar { width:8px; background: linear-gradient(180deg,#ff8c42,#ff4242); border-radius:3px 3px 0 0; }
 .yt-suggestion-list { list-style:none; margin:.9rem 0 0; padding:0; display:flex; flex-direction:column; gap:.55rem; }
 .yt-suggestion-item { display:flex; gap:.65rem; align-items:center; padding:.55rem .6rem; border-radius:8px; cursor:pointer; background:rgba(255,255,255,0.03); transition:background .25s; }
 .yt-suggestion-item:hover { background:rgba(192,0,255,0.28); }
