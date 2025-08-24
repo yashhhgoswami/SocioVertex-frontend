@@ -39,20 +39,25 @@ const LandingPage = () => {
     if(!searchQuery.trim()) return;
     setSearchLoading(true); setSearchError(''); setYtStats(null);
     try {
-      const res = await fetch(`http://localhost:3000/public/youtube/search?q=${encodeURIComponent(searchQuery.trim())}`);
-      if(!res.ok) throw new Error((await res.json()).error || 'Search failed');
-      const data = await res.json();
-      setYtStats(data.stats);
-      // Fetch summary with deltas
-      if(data.stats?.channel_id){
-        const summaryRes = await fetch(`http://localhost:3000/public/youtube/channel/${data.stats.channel_id}/summary`);
+      const endpoint = `http://localhost:3000/public/youtube/search?q=${encodeURIComponent(searchQuery.trim())}`;
+      const res = await fetch(endpoint);
+      let body = null;
+      try { body = await res.json(); } catch(_) { /* ignore */ }
+      if(!res.ok) {
+        const msg = body?.error || `Search failed (status ${res.status})`;
+        throw new Error(msg);
+      }
+      if(!body?.stats) throw new Error('No stats returned');
+      setYtStats(body.stats);
+      if(body.stats?.channel_id){
+        const summaryRes = await fetch(`http://localhost:3000/public/youtube/channel/${body.stats.channel_id}/summary`);
         if(summaryRes.ok){
           const summary = await summaryRes.json();
           setYtStats(s => ({ ...s, summary }));
         }
       }
     } catch(e){
-      setSearchError(e.message);
+      setSearchError(e.message + ' — tip: try the exact channel ID (starts with UC...) or @handle');
     } finally {
       setSearchLoading(false);
     }
@@ -262,7 +267,7 @@ const LandingPage = () => {
               />
               <button className="search-btn" onClick={runAnalyze} disabled={searchLoading}>{searchLoading? '...' : 'Analyze'}</button>
             </div>
-            {searchError && <div className="search-error" style={{color:'#ff4d6d', marginTop:'6px'}}>{searchError}</div>}
+            {searchError && <div className="search-error" style={{color:'#ff4d6d', marginTop:'6px', fontSize:'0.8rem'}}>{searchError}</div>}
           </div>
           {ytStats && (
             <div className="analyze-result-card reveal" data-reveal="up" data-reveal-once style={{marginTop:'1.5rem'}}>
