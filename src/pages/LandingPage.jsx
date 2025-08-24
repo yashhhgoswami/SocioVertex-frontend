@@ -253,7 +253,7 @@ const LandingPage = () => {
             <div className="search-box">
               <input
                 type="text"
-                placeholder="Search YouTube creator name, handle (@name) or channel ID..."
+                placeholder="Search your favourite YouTuber name"
                 className="search-input"
                 value={searchQuery}
                 onChange={e=>setSearchQuery(e.target.value)}
